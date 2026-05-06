@@ -8,14 +8,14 @@
   "release": {
     "tag": "v3.4.0",
     "htmlUrl": "https://github.com/EkilyHQ/Press-Theme-Cartograph/releases/tag/v3.4.0",
-    "publishedAt": "2026-05-06T18:12:00Z",
+    "publishedAt": "2026-05-06T19:26:06Z",
     "notes": ""
   },
   "asset": {
     "name": "press-theme-cartograph-v3.4.0.zip",
     "url": "https://github.com/EkilyHQ/Press-Theme-Cartograph/releases/download/v3.4.0/press-theme-cartograph-v3.4.0.zip",
     "size": 18924,
-    "digest": "sha256:5d8e0d7d980550c8d00aa7cd21f6edfb98e5e4bc1103060dce1f8f1256dd2d29"
+    "digest": "sha256:08e63b83ee92bc3c98f2f4fb00928bcf5657f44cd38399f8b507d39c7b97e417"
   },
   "files": [
     "modules/interactions.js",
