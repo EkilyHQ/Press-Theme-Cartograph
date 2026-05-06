@@ -3,19 +3,19 @@
   "type": "press-theme",
   "value": "cartograph",
   "label": "Cartograph",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "contractVersion": 1,
   "release": {
-    "tag": "v3.4.0",
-    "htmlUrl": "https://github.com/EkilyHQ/Press-Theme-Cartograph/releases/tag/v3.4.0",
-    "publishedAt": "2026-05-06T19:26:06Z",
+    "tag": "v3.4.1",
+    "htmlUrl": "https://github.com/EkilyHQ/Press-Theme-Cartograph/releases/tag/v3.4.1",
+    "publishedAt": "2026-05-06T20:01:09Z",
     "notes": ""
   },
   "asset": {
-    "name": "press-theme-cartograph-v3.4.0.zip",
-    "url": "https://github.com/EkilyHQ/Press-Theme-Cartograph/releases/download/v3.4.0/press-theme-cartograph-v3.4.0.zip",
+    "name": "press-theme-cartograph-v3.4.1.zip",
+    "url": "https://raw.githubusercontent.com/EkilyHQ/Press-Theme-Cartograph/release-artifacts/v3.4.1/press-theme-cartograph-v3.4.1.zip",
     "size": 18924,
-    "digest": "sha256:08e63b83ee92bc3c98f2f4fb00928bcf5657f44cd38399f8b507d39c7b97e417"
+    "digest": "sha256:865093969fc49a48601b155392558b881bf6c7d6e0fd83fc403959c70e43e645"
   },
   "files": [
     "modules/interactions.js",
