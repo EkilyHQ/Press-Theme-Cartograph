@@ -1,0 +1,84 @@
+{
+  "slug": "cartograph",
+  "label": "Cartograph",
+  "repo": "EkilyHQ/Press-Theme-Cartograph",
+  "siteTitle": "Nora Quill Field Atlas",
+  "siteDescription": "A fictional mapping diary for showing the gridded, wayfinding-heavy Cartograph theme.",
+  "author": "Nora Quill",
+  "aboutTitle": "About Nora Quill",
+  "about": "Nora Quill is a fictional route-maker who writes about map rooms, survey marks, ferry timetables, and the rituals of comparing old coordinates with present streets. The demo text is invented; every image source cited in the posts is public-domain or CC0-compatible material.",
+  "posts": [
+    {
+      "id": "standard-world-grid",
+      "title": "The Standard World Grid at Desk Scale",
+      "date": "2026-05-04",
+      "tags": ["maps", "grid", "archive"],
+      "excerpt": "A desk note on why an old world map makes Cartograph's command strip feel at home.",
+      "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Standard_map_of_the_World._LOC_00556407.jpg",
+      "source": {
+        "label": "Standard map of the World, Library of Congress record on Wikimedia Commons",
+        "page": "https://commons.wikimedia.org/wiki/File:Standard_map_of_the_World._LOC_00556407.jpg",
+        "license": "Public domain mark; available through the United States Library of Congress Geography and Map Division"
+      },
+      "body": [
+        "A gridded map does not ask to be admired first. It asks to be used. That is why it belongs in a Cartograph demo: the theme's rails, legends, and compact controls read like equipment rather than decoration.",
+        "I pinned four notes around the margin and treated each as a route: north for index cards, east for links, south for tags, west for the table of contents.",
+        "The page should feel like it can survive repeated checking. A map is a promise that the second reading will be faster."
+      ]
+    },
+    {
+      "id": "world-map-folds",
+      "title": "Folds Before Coordinates",
+      "date": "2026-04-13",
+      "tags": ["paper", "route", "history"],
+      "excerpt": "A fictional field essay about reading crease lines before reading labels.",
+      "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Map_of_the_World.jpg",
+      "source": {
+        "label": "1894 Map of the World on Wikimedia Commons",
+        "page": "https://commons.wikimedia.org/wiki/File:Map_of_the_World.jpg",
+        "license": "Public domain; faithful photographic reproduction of a two-dimensional public-domain work"
+      },
+      "body": [
+        "Before coordinates, there are folds. The fold tells you where a map was opened often enough to become soft, and the soft place is usually where a decision waited.",
+        "Cartograph gives this kind of post a useful density. The background grid and restrained radius make tables, lists, and source notes feel native to the reading surface.",
+        "I like maps that show their handling. A route that never becomes creased has probably never been tested."
+      ]
+    },
+    {
+      "id": "us-outline-daybook",
+      "title": "A Daybook for an Outline Map",
+      "date": "2026-03-21",
+      "tags": ["outline", "survey", "notation"],
+      "excerpt": "A short daybook entry about using blank outlines to make room for local observations.",
+      "image": "https://commons.wikimedia.org/wiki/Special:FilePath/United_States_Public_Domain_Map.svg",
+      "source": {
+        "label": "United States Public Domain Map on Wikimedia Commons",
+        "page": "https://commons.wikimedia.org/wiki/File:United_States_Public_Domain_Map.svg",
+        "license": "Public domain; based on a work of the U.S. federal government"
+      },
+      "body": [
+        "An outline map is useful because it refuses to finish the thought. It leaves room for weather, delays, errands, and the private legends that no official atlas can hold.",
+        "For demo content, an outline also tests contrast. The map remains readable beside Cartograph's paper tones, and the source note does not compete with the route.",
+        "I marked the day in pencil: three calls, one bridge closure, two names for the same hill."
+      ]
+    },
+    {
+      "id": "hangar-as-compass",
+      "title": "Using a Hangar as a Compass",
+      "date": "2026-02-27",
+      "tags": ["orientation", "architecture", "field-note"],
+      "excerpt": "A practical note on turning a long interior into a directional instrument.",
+      "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Loring_Arch_Interior.jpg",
+      "source": {
+        "label": "Loring Arch Interior, National Park Service record on Wikimedia Commons",
+        "page": "https://commons.wikimedia.org/wiki/File:Loring_Arch_Interior.jpg",
+        "license": "Public domain; based on work by a National Park Service employee created as part of official duties"
+      },
+      "body": [
+        "A long building can act like a compass if the light is consistent. Stand still, read the ribs, and the whole span begins to point.",
+        "The note is here because Cartograph is not only for literal maps. It is for any page where orientation matters: a dense post list, a side rail, a route map, and a clean place for utilities.",
+        "When the coordinates fail, use the room."
+      ]
+    }
+  ]
+}
