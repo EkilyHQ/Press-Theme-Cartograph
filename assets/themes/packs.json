@@ -1,0 +1,58 @@
+[
+  {
+    "value": "native",
+    "label": "Native",
+    "version": "3.4.0",
+    "contractVersion": 1,
+    "builtIn": true,
+    "removable": false,
+    "source": {
+      "type": "builtin"
+    },
+    "release": {
+      "tag": "v3.3.64"
+    },
+    "files": [
+      "base.css",
+      "modules/footer.js",
+      "modules/interactions.js",
+      "modules/layout.js",
+      "modules/mainview.js",
+      "modules/nav-tabs.js",
+      "modules/search-box.js",
+      "modules/site-card.js",
+      "modules/tag-filter.js",
+      "modules/toc.js",
+      "theme.css",
+      "theme.json"
+    ]
+  },
+  {
+    "value": "cartograph",
+    "label": "Cartograph",
+    "version": "3.4.1",
+    "contractVersion": 1,
+    "builtIn": false,
+    "removable": true,
+    "source": {
+      "type": "official",
+      "repo": "EkilyHQ/Press-Theme-Cartograph",
+      "manifestUrl": "https://raw.githubusercontent.com/EkilyHQ/Press-Theme-Cartograph/main/theme-release.json"
+    },
+    "release": {
+      "tag": "v3.4.1",
+      "htmlUrl": "https://github.com/EkilyHQ/Press-Theme-Cartograph/releases/tag/v3.4.1",
+      "publishedAt": "2026-05-06T20:01:09Z",
+      "assetName": "press-theme-cartograph-v3.4.1.zip",
+      "size": 18924,
+      "digest": "sha256:865093969fc49a48601b155392558b881bf6c7d6e0fd83fc403959c70e43e645"
+    },
+    "files": [
+      "modules/interactions.js",
+      "modules/layout.js",
+      "modules/views.js",
+      "theme.css",
+      "theme.json"
+    ]
+  }
+]

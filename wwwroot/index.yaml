@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=../assets/schema/index.json
+
+standard-world-grid:
+  en: post/standard-world-grid/en.md
+world-map-folds:
+  en: post/world-map-folds/en.md
+us-outline-daybook:
+  en: post/us-outline-daybook/en.md
+hangar-as-compass:
+  en: post/hangar-as-compass/en.md

@@ -1,0 +1,14 @@
+siteTitle: "Nora Quill Field Atlas"
+siteDescription:
+  en: "A fictional mapping diary for showing the gridded, wayfinding-heavy Cartograph theme."
+contentRoot: wwwroot
+defaultLanguage: en
+themeMode: auto
+themePack: "cartograph"
+annotate:
+  enabled: false
+repo:
+  provider: github
+  owner: EkilyHQ
+  name: "Press-Theme-Cartograph"
+  branch: demo
