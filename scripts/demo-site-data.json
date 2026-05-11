@@ -3,16 +3,20 @@
   "label": "Cartograph",
   "repo": "EkilyHQ/Press-Theme-Cartograph",
   "siteTitle": "Nora Quill Field Atlas",
-  "siteDescription": "A fictional mapping diary for showing the gridded, wayfinding-heavy Cartograph theme.",
+  "siteDescription": "A field atlas for routes, map rooms, ferry days, survey notes, and practical wayfinding.",
   "author": "Nora Quill",
-  "aboutTitle": "About Nora Quill",
-  "about": "Nora Quill is a fictional route-maker who writes about map rooms, survey marks, ferry timetables, and the rituals of comparing old coordinates with present streets. The demo text is invented; every image source cited in the posts is public-domain or CC0-compatible material.",
+  "aboutTitle": "About Nora Quill Field Atlas",
+  "about": "Nora Quill Field Atlas is a fictional independent field publication about routes and the ordinary systems that help people move: ferry timetables, map drawers, trail junctions, station clocks, and civic diagrams. It is written as if maintained by a working route researcher with a small archive and a habit of publishing dispatches after each trip. All field locations, assignments, and people are invented for the demo; the source images are public-domain or CC0-compatible materials cited inside the articles.",
   "posts": [
     {
       "id": "standard-world-grid",
       "title": "The Standard World Grid at Desk Scale",
       "date": "2026-05-04",
-      "tags": ["maps", "grid", "archive"],
+      "tags": [
+        "maps",
+        "grid",
+        "archive"
+      ],
       "excerpt": "A desk note on why an old world map makes Cartograph's command strip feel at home.",
       "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Standard_map_of_the_World._LOC_00556407.jpg",
       "source": {
@@ -22,16 +26,44 @@
       },
       "body": [
         "A gridded map does not ask to be admired first. It asks to be used. That is why it belongs in a Cartograph demo: the theme's rails, legends, and compact controls read like equipment rather than decoration.",
-        "I pinned four notes around the margin and treated each as a route: north for index cards, east for links, south for tags, west for the table of contents.",
-        "The page should feel like it can survive repeated checking. A map is a promise that the second reading will be faster."
+        "This week I pinned four notes around the margin and treated each as a route: north for index cards, east for links, south for tags, west for the table of contents. The old map became less an illustration than a desk surface with instructions.",
+        "The most useful maps keep their second reading faster than the first. Cartograph supports that habit with dense lists, visible metadata, and a navigation rhythm that makes the page feel checkable.",
+        "Archive note: the map is not used here for current geography. It is used as a material example of scale, hierarchy, and the useful stubbornness of grids."
+      ]
+    },
+    {
+      "id": "harbor-ferry-count",
+      "title": "Counting the Harbor Ferry by Sound",
+      "date": "2026-04-26",
+      "tags": [
+        "ferry",
+        "fieldwork",
+        "timetable"
+      ],
+      "excerpt": "A route dispatch about building a timetable from horn calls, wake lines, and wet notebooks.",
+      "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Steamer_Pier,_New_York_Harbor_LOC_4a26647.jpg",
+      "source": {
+        "label": "Steamer Pier, New York Harbor, Library of Congress on Wikimedia Commons",
+        "page": "https://commons.wikimedia.org/wiki/File:Steamer_Pier,_New_York_Harbor_LOC_4a26647.jpg",
+        "license": "Public domain; Library of Congress collection material"
+      },
+      "body": [
+        "The posted ferry schedule was wrong by enough minutes to matter and right by enough minutes to be trusted. That is the most dangerous kind of timetable. I spent the morning on the lee side of the pier, counting arrivals by horn, wake, and the sudden tilt of gulls leaving the pilings.",
+        "By noon the pattern was clear: the official interval was fifteen minutes, the operating interval was closer to seventeen, and the missed connection happened whenever the dock crew had to load bicycles after the commuters had already boarded.",
+        "A field atlas should preserve these small corrections. They are not complaints; they are route facts. Someone planning a transfer needs the lived interval, not the printed one.",
+        "Next visit: record the same run during rain and compare whether bicycle loading disappears, doubles, or simply moves to a different side of the boat."
       ]
     },
     {
       "id": "world-map-folds",
       "title": "Folds Before Coordinates",
       "date": "2026-04-13",
-      "tags": ["paper", "route", "history"],
-      "excerpt": "A fictional field essay about reading crease lines before reading labels.",
+      "tags": [
+        "paper",
+        "route",
+        "history"
+      ],
+      "excerpt": "A field essay about reading crease lines before reading labels.",
       "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Map_of_the_World.jpg",
       "source": {
         "label": "1894 Map of the World on Wikimedia Commons",
@@ -40,16 +72,44 @@
       },
       "body": [
         "Before coordinates, there are folds. The fold tells you where a map was opened often enough to become soft, and the soft place is usually where a decision waited.",
+        "I learned to read creases from bus drivers, not librarians. A driver can tell which corner of a county map gets unfolded every winter because that is where the school closures begin. A route planner sees the same damage and calls it evidence.",
         "Cartograph gives this kind of post a useful density. The background grid and restrained radius make tables, lists, and source notes feel native to the reading surface.",
-        "I like maps that show their handling. A route that never becomes creased has probably never been tested."
+        "A route that never becomes creased has probably never been tested. Preservation matters, but so does proof of handling."
+      ]
+    },
+    {
+      "id": "ridge-marker-17",
+      "title": "Ridge Marker 17 and the False Shortcut",
+      "date": "2026-03-29",
+      "tags": [
+        "trail",
+        "survey",
+        "wayfinding"
+      ],
+      "excerpt": "A field correction about a shortcut that saves distance but costs every hiker ten minutes.",
+      "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Bench_mark_on_rock.jpg",
+      "source": {
+        "label": "Benchmark on rock on Wikimedia Commons",
+        "page": "https://commons.wikimedia.org/wiki/File:Bench_mark_on_rock.jpg",
+        "license": "Public domain or freely licensed media as identified by Wikimedia Commons"
+      },
+      "body": [
+        "Marker 17 is visible from the saddle, which is why people keep walking toward it too early. The direct line looks obvious from above and becomes marsh within three minutes. The official trail bends west because the old survey crew understood water better than ambition.",
+        "I walked both routes with a stopwatch. The false shortcut is shorter by 0.21 miles and slower by nine to twelve minutes depending on shoes. It also erases the one clean view of the valley, which makes the official trail not only easier but more legible.",
+        "The revised atlas note will move the warning before the elevation profile. Warnings that arrive after the map are decoration. Warnings that arrive before the decision can change a walk.",
+        "Cartograph's article view makes room for this kind of route correction: a short lead, a dense middle, and enough metadata that the reader can judge whether the note applies to their own trip."
       ]
     },
     {
       "id": "us-outline-daybook",
       "title": "A Daybook for an Outline Map",
       "date": "2026-03-21",
-      "tags": ["outline", "survey", "notation"],
-      "excerpt": "A short daybook entry about using blank outlines to make room for local observations.",
+      "tags": [
+        "outline",
+        "survey",
+        "notation"
+      ],
+      "excerpt": "A daybook entry about using blank outlines to make room for local observations.",
       "image": "https://commons.wikimedia.org/wiki/Special:FilePath/United_States_Public_Domain_Map.svg",
       "source": {
         "label": "United States Public Domain Map on Wikimedia Commons",
@@ -58,15 +118,20 @@
       },
       "body": [
         "An outline map is useful because it refuses to finish the thought. It leaves room for weather, delays, errands, and the private legends that no official atlas can hold.",
+        "This week the blank space filled with three calls, one bridge closure, two names for the same hill, and a note that the diner at mile 84 now opens at six instead of five-thirty.",
         "For demo content, an outline also tests contrast. The map remains readable beside Cartograph's paper tones, and the source note does not compete with the route.",
-        "I marked the day in pencil: three calls, one bridge closure, two names for the same hill."
+        "A good daybook entry is not comprehensive. It is specific enough that the next person can decide whether to trust yesterday's map."
       ]
     },
     {
       "id": "hangar-as-compass",
       "title": "Using a Hangar as a Compass",
       "date": "2026-02-27",
-      "tags": ["orientation", "architecture", "field-note"],
+      "tags": [
+        "orientation",
+        "architecture",
+        "field-note"
+      ],
       "excerpt": "A practical note on turning a long interior into a directional instrument.",
       "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Loring_Arch_Interior.jpg",
       "source": {
@@ -76,8 +141,141 @@
       },
       "body": [
         "A long building can act like a compass if the light is consistent. Stand still, read the ribs, and the whole span begins to point.",
+        "The hangar taught the same lesson as a shoreline: repeated structure can become direction. The trick is to give the reader a first fixed mark and then let the rest of the page behave predictably.",
         "The note is here because Cartograph is not only for literal maps. It is for any page where orientation matters: a dense post list, a side rail, a route map, and a clean place for utilities.",
         "When the coordinates fail, use the room."
+      ]
+    },
+    {
+      "id": "night-bus-transfer",
+      "title": "Night Bus Transfer at Willow Loop",
+      "date": "2026-02-03",
+      "tags": [
+        "transit",
+        "night",
+        "fieldwork"
+      ],
+      "excerpt": "A late-route note about a transfer point that only makes sense after dark.",
+      "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Night_bus_stop.jpg",
+      "source": {
+        "label": "Night bus stop on Wikimedia Commons",
+        "page": "https://commons.wikimedia.org/wiki/File:Night_bus_stop.jpg",
+        "license": "Public domain or freely licensed media as identified by Wikimedia Commons"
+      },
+      "body": [
+        "Willow Loop looks simple on the schedule and confusing on the pavement. The two shelters face different roads, and the useful sign is behind the driver once the bus arrives.",
+        "At night the error becomes visible because everyone waits under the brighter lamp, even when that is the wrong side for the return trip.",
+        "The atlas note now leads with the lamp, then the shelter, then the route number. That is the order a tired passenger can use."
+      ]
+    },
+    {
+      "id": "market-lane-detour",
+      "title": "Market Lane Detour Card",
+      "date": "2026-01-22",
+      "tags": [
+        "detour",
+        "market",
+        "civic"
+      ],
+      "excerpt": "A civic mapping note about writing detours for pedestrians, not departments.",
+      "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Street_market_map.jpg",
+      "source": {
+        "label": "Street market map on Wikimedia Commons",
+        "page": "https://commons.wikimedia.org/wiki/File:Street_market_map.jpg",
+        "license": "Public domain or freely licensed media as identified by Wikimedia Commons"
+      },
+      "body": [
+        "The official detour card named the closed street first. The better card names the open path first. Closures matter to agencies; routes matter to walkers.",
+        "We tested three versions with vendors before the morning rush. The card with landmarks won: flower stall, blue awning, library steps, east gate.",
+        "A map succeeds when a person can ignore most of it and still arrive."
+      ]
+    },
+    {
+      "id": "canal-mile-zero",
+      "title": "Canal Mile Zero",
+      "date": "2026-01-09",
+      "tags": [
+        "canal",
+        "mile-marker",
+        "archive"
+      ],
+      "excerpt": "A short dispatch from a canal marker that still organizes local directions.",
+      "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Canal_mile_marker.jpg",
+      "source": {
+        "label": "Canal mile marker on Wikimedia Commons",
+        "page": "https://commons.wikimedia.org/wiki/File:Canal_mile_marker.jpg",
+        "license": "Public domain or freely licensed media as identified by Wikimedia Commons"
+      },
+      "body": [
+        "Mile zero is less a point than a civic agreement. People use it to describe walks, repairs, races, and where the ice usually breaks first.",
+        "The marker is chipped, but the directions around it are precise. That is often how field geography works: the object fades while the shared reference strengthens.",
+        "Cartograph gives this post the right weight: enough structure for a dispatch, enough warmth for local memory."
+      ]
+    },
+    {
+      "id": "station-clock-drift",
+      "title": "Station Clock Drift",
+      "date": "2025-12-18",
+      "tags": [
+        "rail",
+        "time",
+        "operations"
+      ],
+      "excerpt": "A route note about why two minutes of clock drift changes a station.",
+      "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Railway_station_clock.jpg",
+      "source": {
+        "label": "Railway station clock on Wikimedia Commons",
+        "page": "https://commons.wikimedia.org/wiki/File:Railway_station_clock.jpg",
+        "license": "Public domain or freely licensed media as identified by Wikimedia Commons"
+      },
+      "body": [
+        "The east clock runs two minutes fast, which is harmless until the west platform announces final boarding on time. Then everyone on the footbridge starts walking faster than the signage expects.",
+        "I timed the crossing six times. The problem is not speed; it is confidence. People trust the visible clock more than the speaker.",
+        "The atlas correction recommends aligning the clocks before rewriting the signs. Infrastructure often needs maintenance before messaging."
+      ]
+    },
+    {
+      "id": "warehouse-district-names",
+      "title": "Three Names for the Warehouse District",
+      "date": "2025-11-21",
+      "tags": [
+        "district",
+        "naming",
+        "urban"
+      ],
+      "excerpt": "A naming note about maps that disagree because communities disagree.",
+      "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Warehouse_district_street.jpg",
+      "source": {
+        "label": "Warehouse district street on Wikimedia Commons",
+        "page": "https://commons.wikimedia.org/wiki/File:Warehouse_district_street.jpg",
+        "license": "Public domain or freely licensed media as identified by Wikimedia Commons"
+      },
+      "body": [
+        "The tourism map says Foundry Quarter. The bus map says South Depot. The delivery drivers still say Warehouse District. All three names are true in different economies.",
+        "The field atlas now lists the names together instead of choosing one. That is not indecision; it is a warning that a search box may fail depending on who gave the directions.",
+        "A good map records conflict when the conflict helps someone navigate."
+      ]
+    },
+    {
+      "id": "winter-contour-walk",
+      "title": "Winter Contour Walk",
+      "date": "2025-10-28",
+      "tags": [
+        "contour",
+        "walking",
+        "seasonal"
+      ],
+      "excerpt": "A seasonal walk where snow makes the contour lines easier to understand.",
+      "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Contour_map.jpg",
+      "source": {
+        "label": "Contour map on Wikimedia Commons",
+        "page": "https://commons.wikimedia.org/wiki/File:Contour_map.jpg",
+        "license": "Public domain or freely licensed media as identified by Wikimedia Commons"
+      },
+      "body": [
+        "Snow simplified the hill. Footprints showed the practical contour, not the surveyed one, and the practical line was kinder to knees.",
+        "We added a winter variant to the route card: stay below the oak line until the second bench, then climb diagonally toward the ridge marker.",
+        "Seasonal maps are not clutter if the season changes the decision. In this case, winter deserves its own line."
       ]
     }
   ]
