@@ -224,7 +224,7 @@ function updateSearchPlaceholder(context = {}, params = {}) {
 function setupToolsPanel(context = {}) {
   const panel = getRegion(context, 'toolsPanel', '.cartograph-tools');
   if (!panel) return false;
-  try { mountThemeControls({ host: panel, variant: 'cartograph' }); } catch (_) {}
+  try { mountThemeControls({ host: panel, variant: 'cartograph', themeContext: context }); } catch (_) {}
   try { applySavedTheme(); } catch (_) {}
   return true;
 }
