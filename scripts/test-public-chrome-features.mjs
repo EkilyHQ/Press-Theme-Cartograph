@@ -51,6 +51,11 @@ assert.match(
   'shared post meta card should receive the tags feature gate'
 );
 assert.match(views, /featureEnabled\(params, 'toc'\)/);
+assert.match(
+  views,
+  /renderContentLegend\(\{[\s\S]*tocHtml: featureEnabled\(params, 'toc'\) \? \(params\.tocHtml \|\| content\.tocHtml \|\| ''\) : ''[\s\S]*\}\);/,
+  'disabled toc should suppress only TOC content while preserving other legend panels'
+);
 assert.match(interactions, /renderFooterLinks/);
 assert.match(
   interactions,
@@ -472,6 +477,12 @@ viewsModule.renderPostView({
   features,
   markdownHtml: '<p>Body</p>',
   markdown: '# Product',
+  content: {
+    assets: [{ type: 'image', alt: 'Hero shot', url: 'https://example.test/hero.png' }],
+    links: [{ label: 'Docs', url: 'https://example.test/docs' }],
+    headings: [{ level: 2, id: 'intro', text: 'Intro' }],
+    blocks: 3
+  },
   postMetadata: {
     title: 'Product',
     tag: ['alpha'],
@@ -485,6 +496,11 @@ viewsModule.renderPostView({
 });
 assert.doesNotMatch(harness.elements.main.innerHTML, /post-meta-card|cartograph-stats|alpha/, 'disabled post meta/tags should leave no post meta or tag chrome');
 assert.equal(harness.elements.toc.hidden, true, 'post render with disabled TOC should keep TOC hidden');
+assert.match(harness.elements.routeMap.innerHTML, /Map|Intro/, 'disabled TOC should not clear the route-map panel');
+assert.equal(harness.elements.mediaPanel.hidden, false, 'disabled TOC should not hide the media panel');
+assert.match(harness.elements.mediaPanel.innerHTML, /Hero shot/, 'disabled TOC should keep media panel content');
+assert.equal(harness.elements.linksPanel.hidden, false, 'disabled TOC should not hide the links panel');
+assert.match(harness.elements.linksPanel.innerHTML, /Docs/, 'disabled TOC should keep link panel content');
 
 viewsModule.renderIndexView({
   ctx: {

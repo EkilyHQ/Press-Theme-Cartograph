@@ -430,16 +430,12 @@ function renderArticleShell(params = {}, options = {}) {
       ${options.kind === 'post' ? '<footer class="cartograph-article__footer"><div class="cartograph-postnav" data-post-nav></div></footer>' : ''}
     </article>`;
 
-  if (featureEnabled(params, 'toc')) {
-    renderContentLegend({
-      ...params,
-      content,
-      articleTitle: title,
-      tocHtml: params.tocHtml || content.tocHtml || ''
-    });
-  } else {
-    resetContentLegend(params);
-  }
+  renderContentLegend({
+    ...params,
+    content,
+    articleTitle: title,
+    tocHtml: featureEnabled(params, 'toc') ? (params.tocHtml || content.tocHtml || '') : ''
+  });
 
   try {
     if (options.kind === 'post' && params.utilities && typeof params.utilities.renderPostNav === 'function') {
