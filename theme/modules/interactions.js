@@ -38,10 +38,14 @@ function setChromeHidden(element, hidden) {
 function updateHomeLinks(context = {}, params = {}) {
   const doc = context.document || defaultDocument;
   if (!doc || typeof doc.querySelectorAll !== 'function') return false;
-  const getHomeSlug = typeof params.getHomeSlug === 'function' ? params.getHomeSlug : null;
+  const win = params.window || context.window || defaultWindow;
+  const getHomeSlug = typeof params.getHomeSlug === 'function'
+    ? params.getHomeSlug
+    : (win && typeof win.__press_get_home_slug === 'function' ? win.__press_get_home_slug : null);
   const makeHref = withLang(context, params);
   const homeSlug = getHomeSlug ? String(getHomeSlug() || '').trim() : '';
-  const href = homeSlug ? makeHref(`?tab=${encodeURIComponent(homeSlug)}`) : '#';
+  if (!homeSlug) return false;
+  const href = makeHref(`?tab=${encodeURIComponent(homeSlug)}`);
   doc.querySelectorAll('[data-site-home]').forEach((link) => {
     try { link.setAttribute('href', href); } catch (_) {}
   });
@@ -308,7 +312,7 @@ function renderNavLinks(nav, tabsBySlug, activeSlug, postsEnabled, getHomeSlug, 
   const makeHref = withLang(context, params);
   const items = [];
   const homeSlug = typeof getHomeSlug === 'function' ? getHomeSlug() : 'posts';
-  updateHomeLinks(context, params);
+  updateHomeLinks(context, { ...(params || {}), getHomeSlug: () => homeSlug });
   if (!postsEnabled || postsEnabled()) {
     items.push({ slug: 'posts', label: t('ui.allPosts'), href: makeHref('?tab=posts') });
   }

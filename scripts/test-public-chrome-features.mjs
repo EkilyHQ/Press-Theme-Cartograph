@@ -26,6 +26,11 @@ assert.doesNotMatch(source, /href\s*=\s*["']\?tab=posts["']/);
 assert.match(layout, /data-site-home/);
 assert.match(interactions, /siteFeatureContextEnabled/);
 assert.match(interactions, /function updateHomeLinks[\s\S]*getHomeSlug[\s\S]*data-site-home/);
+assert.match(
+  interactions,
+  /function updateHomeLinks[\s\S]*__press_get_home_slug[\s\S]*if \(!homeSlug\) return false;[\s\S]*const href = makeHref\(`\?tab=\$\{encodeURIComponent\(homeSlug\)\}`\);/,
+  'identity refresh should use the runtime home helper or preserve existing home hrefs'
+);
 
 [
   'visitorThemeControls',
@@ -66,6 +71,11 @@ assert.match(
   interactions,
   /if \(featureEnabled\(params, 'tags', localContext\) && featureEnabled\(params, 'search', localContext\) && typeof params\.renderTagSidebar === 'function'\) \{[\s\S]*\} else \{[\s\S]*getRegion\(localContext, \['tags', 'tagBand'\], '\.cartograph-tagband'\)[\s\S]*setChromeHidden\(tagBox, true\);/,
   'index enhancement should clear and hide tag band unless both tags and search are enabled'
+);
+assert.match(
+  interactions,
+  /function renderNavLinks[\s\S]*const homeSlug = typeof getHomeSlug === 'function' \? getHomeSlug\(\) : 'posts';[\s\S]*updateHomeLinks\(context, \{ \.\.\.\(params \|\| \{\}\), getHomeSlug: \(\) => homeSlug \}\);/,
+  'nav rendering should pass its computed home fallback into the home link updater'
 );
 
 class TestClassList {
@@ -408,6 +418,22 @@ api.effects.renderFooterNav({
 });
 assert.equal(harness.elements.footerNav.hidden, true, 'disabled footer nav should stay hidden');
 assert.equal(harness.elements.footerNav.innerHTML, '', 'disabled footer nav should stay empty');
+
+api.effects.renderTabs({
+  features,
+  tabsBySlug: { about: { title: 'About' } },
+  activeSlug: 'about',
+  postsEnabled: () => false,
+  getHomeSlug: () => 'about',
+  withLangParam: (href) => href
+});
+assert.equal(harness.elements.home.getAttribute('href'), '?tab=about', 'tab rendering should set home links from the runtime home helper');
+api.effects.renderSiteIdentity({
+  features,
+  config: { siteTitle: 'Product refreshed' },
+  withLangParam: (href) => href
+});
+assert.equal(harness.elements.home.getAttribute('href'), '?tab=about', 'identity refresh without home helpers should preserve home href');
 
 api.effects.renderSiteLinks({
   features,
