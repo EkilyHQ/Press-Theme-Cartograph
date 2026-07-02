@@ -5,6 +5,7 @@ import {
 } from '../../../js/theme.js';
 import { renderTagSidebar as renderDefaultTags } from '../../../js/tags.js';
 import { prefersReducedMotion } from '../../../js/dom-utils.js';
+import { siteFeatureContextEnabled } from '../../../js/site-features.js';
 import {
   renderContentLegend,
   resetContentLegend
@@ -15,6 +16,36 @@ const defaultDocument = typeof document !== 'undefined' ? document : undefined;
 
 function safe(value) {
   return escapeHtml(String(value ?? '')) || '';
+}
+
+function featureEnabled(params = {}, key, context = {}) {
+  const features = (params && params.features)
+    || (params && params.ctx && params.ctx.features)
+    || (params && params.context && params.context.features)
+    || (context && context.features);
+  return siteFeatureContextEnabled(features, key);
+}
+
+function setChromeHidden(element, hidden) {
+  if (!element) return;
+  try { element.hidden = !!hidden; } catch (_) {}
+  try {
+    if (hidden) element.setAttribute('aria-hidden', 'true');
+    else element.removeAttribute('aria-hidden');
+  } catch (_) {}
+}
+
+function updateHomeLinks(context = {}, params = {}) {
+  const doc = context.document || defaultDocument;
+  if (!doc || typeof doc.querySelectorAll !== 'function') return false;
+  const getHomeSlug = typeof params.getHomeSlug === 'function' ? params.getHomeSlug : null;
+  const makeHref = withLang(context, params);
+  const homeSlug = getHomeSlug ? String(getHomeSlug() || '').trim() : '';
+  const href = homeSlug ? makeHref(`?tab=${encodeURIComponent(homeSlug)}`) : '#';
+  doc.querySelectorAll('[data-site-home]').forEach((link) => {
+    try { link.setAttribute('href', href); } catch (_) {}
+  });
+  return true;
 }
 
 function translate(context = {}, params = {}) {
@@ -213,6 +244,11 @@ function hideElement(element, onDone) {
 
 function updateSearchPlaceholder(context = {}, params = {}) {
   const search = getRegion(context, ['search', 'searchBox'], 'press-search.cartograph-search');
+  if (!featureEnabled(params, 'search', context)) {
+    setChromeHidden(search, true);
+    return true;
+  }
+  setChromeHidden(search, false);
   const placeholder = params.placeholder || translate(context, params)('sidebar.searchPlaceholder');
   if (search && typeof search.setPlaceholder === 'function') {
     search.setPlaceholder(placeholder);
@@ -224,6 +260,12 @@ function updateSearchPlaceholder(context = {}, params = {}) {
 function setupToolsPanel(context = {}) {
   const panel = getRegion(context, 'toolsPanel', '.cartograph-tools');
   if (!panel) return false;
+  if (!featureEnabled({}, 'visitorThemeControls', context)) {
+    panel.innerHTML = '';
+    setChromeHidden(panel, true);
+    return true;
+  }
+  setChromeHidden(panel, false);
   try { mountThemeControls({ host: panel, variant: 'cartograph', themeContext: context }); } catch (_) {}
   try { applySavedTheme(); } catch (_) {}
   return true;
@@ -236,9 +278,16 @@ function resetToolsPanel(context = {}) {
   return setupToolsPanel(context);
 }
 
-function renderLinksList(root, config, context) {
+function renderLinksList(root, config, context, params = {}) {
   const t = translate(context);
   if (!root) return;
+  const host = root.closest ? root.closest('.cartograph-rail__card--links') : null;
+  if (!featureEnabled(params, 'profileLinks', context)) {
+    root.innerHTML = '';
+    setChromeHidden(host || root, true);
+    return;
+  }
+  setChromeHidden(host || root, false);
   const links = Array.isArray(config && config.profileLinks) ? config.profileLinks : [];
   if (!links.length) {
     root.innerHTML = `<li class="cartograph-linklist__empty">${safe(t('editor.site.noLinks'))}</li>`;
@@ -259,6 +308,7 @@ function renderNavLinks(nav, tabsBySlug, activeSlug, postsEnabled, getHomeSlug, 
   const makeHref = withLang(context, params);
   const items = [];
   const homeSlug = typeof getHomeSlug === 'function' ? getHomeSlug() : 'posts';
+  updateHomeLinks(context, params);
   if (!postsEnabled || postsEnabled()) {
     items.push({ slug: 'posts', label: t('ui.allPosts'), href: makeHref('?tab=posts') });
   }
@@ -277,16 +327,23 @@ function renderNavLinks(nav, tabsBySlug, activeSlug, postsEnabled, getHomeSlug, 
 
 function renderFooterLinks(root, tabsBySlug, postsEnabled, getHomeSlug, getHomeLabel, context, params) {
   if (!root) return false;
+  if (!featureEnabled(params, 'footerNav', context)) {
+    root.innerHTML = '';
+    setChromeHidden(root, true);
+    return true;
+  }
+  setChromeHidden(root, false);
   const t = translate(context, params);
   const makeHref = withLang(context, params);
   const links = [];
   const homeSlug = typeof getHomeSlug === 'function' ? getHomeSlug() : 'posts';
   const homeLabel = typeof getHomeLabel === 'function' ? getHomeLabel() : t('ui.allPosts');
-  links.push({ href: makeHref(`?tab=${encodeURIComponent(homeSlug)}`), label: homeLabel });
+  if (homeSlug) links.push({ href: makeHref(`?tab=${encodeURIComponent(homeSlug)}`), label: homeLabel });
   Object.entries(tabsBySlug || {}).forEach(([slug, info]) => {
+    if (slug === homeSlug) return;
     links.push({ href: makeHref(`?tab=${encodeURIComponent(slug)}`), label: (info && info.title) || slug });
   });
-  if (!postsEnabled || postsEnabled()) links.push({ href: makeHref('?tab=search'), label: t('ui.searchTab') });
+  if (featureEnabled(params, 'search', context)) links.push({ href: makeHref('?tab=search'), label: t('ui.searchTab') });
   root.innerHTML = links.map((link) => `<a href="${safe(link.href)}">${safe(link.label)}</a>`).join('');
   return true;
 }
@@ -359,8 +416,18 @@ function enhanceIndexLayoutFor(localContext, params = {}) {
   const target = params.containerElement || getRegion(localContext, 'main', '.cartograph-mainview');
   try { if (typeof params.hydrateCardCovers === 'function') params.hydrateCardCovers(target); } catch (_) {}
   try { if (typeof params.applyLazyLoadingIn === 'function') params.applyLazyLoadingIn(target); } catch (_) {}
-  try { if (typeof params.setupSearch === 'function') params.setupSearch(params.allEntries || []); } catch (_) {}
-  try { if (typeof params.renderTagSidebar === 'function') params.renderTagSidebar(params.postsIndexMap || {}); } catch (_) {}
+  try { if (featureEnabled(params, 'search', localContext) && typeof params.setupSearch === 'function') params.setupSearch(params.allEntries || []); } catch (_) {}
+  try {
+    if (featureEnabled(params, 'tags', localContext) && featureEnabled(params, 'search', localContext) && typeof params.renderTagSidebar === 'function') {
+      params.renderTagSidebar(params.postsIndexMap || {});
+    } else {
+      const tagBox = getRegion(localContext, ['tags', 'tagBand'], '.cartograph-tagband');
+      if (tagBox) {
+        tagBox.innerHTML = '';
+        setChromeHidden(tagBox, true);
+      }
+    }
+  } catch (_) {}
   return true;
 }
 
@@ -412,7 +479,8 @@ function createEffects(context = {}) {
       return hideElement(element, onDone);
     },
 
-    renderSiteIdentity({ config } = {}) {
+    renderSiteIdentity({ config, getHomeSlug, features } = {}) {
+      updateHomeLinks(localContext, { getHomeSlug, features });
       const title = localized(localContext, config, 'siteTitle') || 'Press';
       const subtitle = localized(localContext, config, 'siteSubtitle');
       doc.querySelectorAll('[data-site-title], [data-site-title-rail]').forEach((node) => { node.textContent = title; });
@@ -443,8 +511,8 @@ function createEffects(context = {}) {
       return true;
     },
 
-    renderSiteLinks({ config } = {}) {
-      renderLinksList(doc.querySelector('[data-site-links]'), config, localContext);
+    renderSiteLinks({ config, features } = {}) {
+      renderLinksList(doc.querySelector('[data-site-links]'), config, localContext, { features });
       return true;
     },
 
@@ -455,24 +523,36 @@ function createEffects(context = {}) {
     },
 
     renderPostTOC(params = {}) {
+      if (!featureEnabled(params, 'toc', localContext)) {
+        resetContentLegend(viewContext(localContext, params));
+        return true;
+      }
       return renderContentLegend(viewContext(localContext, params));
     },
 
     handleViewChange({ view, context: routeContext } = {}) {
       if (doc && doc.body) doc.body.setAttribute('data-active-view', view || 'posts');
       const search = getRegion(localContext, ['search', 'searchBox'], 'press-search.cartograph-search');
+      if (!featureEnabled({}, 'search', localContext)) setChromeHidden(search, true);
       const queryValue = routeContext && routeContext.queryValue != null ? String(routeContext.queryValue || '') : '';
       if (search) search.value = view === 'search' ? queryValue : '';
       return true;
     },
 
-    renderTagSidebar({ postsIndex, utilities } = {}) {
+    renderTagSidebar({ postsIndex, utilities, features } = {}) {
+      const tagBox = getRegion(localContext, ['tags', 'tagBand'], '.cartograph-tagband');
+      if (!featureEnabled({ features }, 'tags', localContext) || !featureEnabled({ features }, 'search', localContext)) {
+        if (tagBox) {
+          tagBox.innerHTML = '';
+          setChromeHidden(tagBox, true);
+        }
+        return true;
+      }
       const render = utilities && typeof utilities.renderTagSidebar === 'function'
         ? utilities.renderTagSidebar
         : renderDefaultTags;
       try { render(postsIndex || {}); } catch (_) {}
-      const tagBox = getRegion(localContext, ['tags', 'tagBand'], '.cartograph-tagband');
-      if (tagBox) tagBox.hidden = false;
+      setChromeHidden(tagBox, false);
       return true;
     },
 
