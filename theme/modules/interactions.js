@@ -3,7 +3,6 @@ import {
   mountThemeControls,
   applySavedTheme
 } from '../../../js/theme.js';
-import { renderTagSidebar as renderDefaultTags } from '../../../js/tags.js';
 import { prefersReducedMotion } from '../../../js/dom-utils.js';
 import { siteFeatureContextEnabled } from '../../../js/site-features.js';
 import {
@@ -595,7 +594,14 @@ function createEffects(context = {}) {
       }
       const render = utilities && typeof utilities.renderTagSidebar === 'function'
         ? utilities.renderTagSidebar
-        : renderDefaultTags;
+        : null;
+      if (!render) {
+        if (tagBox) {
+          tagBox.innerHTML = '';
+          setChromeHidden(tagBox, true);
+        }
+        return true;
+      }
       try { render(postsIndex || {}); } catch (_) {}
       setChromeHidden(tagBox, false);
       return true;

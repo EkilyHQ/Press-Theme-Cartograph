@@ -12,7 +12,8 @@ function resolvePressRoot() {
   candidates.push(resolve(root, '.press'));
   candidates.push(resolve(root, '..', 'Press'));
   const found = candidates.find((candidate) => existsSync(resolve(candidate, 'assets/js/site-features.js')));
-  return found || candidates[0];
+  if (found) return found;
+  throw new Error(`Press checkout not found for behavior probes. Set PRESS_ROOT or place Press at ../Press. Checked: ${candidates.join(', ')}`);
 }
 const pressRoot = resolvePressRoot();
 const read = (path) => readFileSync(resolve(root, path), 'utf8');
@@ -37,6 +38,7 @@ assert.match(interactions, /function getRouter[\s\S]*ctx\.router/);
 assert.match(interactions, /function getRouteHref[\s\S]*routerFunction\(context, params, name\)/);
 assert.match(interactions, /function updateHomeLinks[\s\S]*getRouteHref\(context, params, 'getHomeHref'\)[\s\S]*data-site-home/);
 assert.match(interactions, /getRouteHref\(context, params, 'getSearchHref'\)/, 'footer search links should use the v4 router search href helper');
+assert.doesNotMatch(interactions, /renderDefaultTags/);
 assert.ok(releaseExample.files.includes('modules/views.js'), 'example release manifest should include every declared runtime module');
 assert.match(
   interactions,
