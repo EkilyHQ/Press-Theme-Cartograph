@@ -26,7 +26,7 @@ export function mount(context = {}) {
   shell.innerHTML = `
     <header class="cartograph-command" role="banner">
       <div class="cartograph-command__brand">
-        <a class="cartograph-brand" href="#" data-site-home>
+        <a class="cartograph-brand" data-site-home aria-disabled="true" tabindex="-1">
           <span class="cartograph-brand__mark cartograph-brand__mark--empty" aria-hidden="true">
             <img class="cartograph-brand__logo" data-site-logo alt="" loading="lazy" decoding="async" hidden />
           </span>

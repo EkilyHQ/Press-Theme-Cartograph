@@ -30,6 +30,7 @@ assert.equal(releaseExample.contractVersion, 4);
 assert.equal(releaseExample.engines.press, '>=3.4.130 <4.0.0');
 assert.doesNotMatch(source, /[?&](?:tab|id)=/, 'v4 packaged source should use router href helpers for public routes');
 assert.doesNotMatch(source, /getRouteHref[\s\S]{0,160}\|\|\s*'#'/, 'v4 route helper null results should not become hash dead links');
+assert.doesNotMatch(layout, /<a[^>]*href="#"[^>]*data-site-home|<a[^>]*data-site-home[^>]*href="#"/, 'brand home link should not start as a hash dead link');
 assert.match(layout, /data-site-home/);
 assert.match(interactions, /siteFeatureContextEnabled/);
 assert.match(interactions, /function getRouter[\s\S]*ctx\.router/);
@@ -39,8 +40,8 @@ assert.match(interactions, /getRouteHref\(context, params, 'getSearchHref'\)/, '
 assert.ok(releaseExample.files.includes('modules/views.js'), 'example release manifest should include every declared runtime module');
 assert.match(
   interactions,
-  /function updateHomeLinks[\s\S]*getRouteHref\(context, params, 'getHomeHref'\)[\s\S]*if \(!href\) return false;[\s\S]*data-site-home/,
-  'identity refresh should use the v4 home href helper or preserve existing home hrefs'
+  /function updateHomeLinks[\s\S]*getRouteHref\(context, params, 'getHomeHref'\)[\s\S]*setHomeLinkHref\(link, href\)/,
+  'identity refresh should use the v4 home href helper and disable home links when no href is available'
 );
 
 [
@@ -487,6 +488,18 @@ api.effects.renderSiteIdentity({
   }
 });
 assert.equal(harness.elements.home.getAttribute('href'), '?tab=localized-home&lang=ja', 'identity refresh should use params.context router helpers');
+api.effects.renderSiteIdentity({
+  features,
+  config: { siteTitle: 'Product unreachable home' },
+  context: {
+    router: {
+      getHomeHref: () => null
+    }
+  }
+});
+assert.equal(harness.elements.home.getAttribute('href'), null, 'null home helper should remove stale home hrefs');
+assert.equal(harness.elements.home.getAttribute('aria-disabled'), 'true', 'null home helper should disable home links');
+assert.equal(harness.elements.home.getAttribute('tabindex'), '-1', 'null home helper should remove home links from tab order');
 
 api.effects.renderSiteLinks({
   features,

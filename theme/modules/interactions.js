@@ -58,15 +58,27 @@ function setChromeHidden(element, hidden) {
   } catch (_) {}
 }
 
+function setHomeLinkHref(link, href) {
+  if (!link) return;
+  if (!href) {
+    try { link.removeAttribute('href'); } catch (_) {}
+    try { link.setAttribute('aria-disabled', 'true'); } catch (_) {}
+    try { link.setAttribute('tabindex', '-1'); } catch (_) {}
+    return;
+  }
+  try { link.setAttribute('href', href); } catch (_) {}
+  try { link.removeAttribute('aria-disabled'); } catch (_) {}
+  try { link.removeAttribute('tabindex'); } catch (_) {}
+}
+
 function updateHomeLinks(context = {}, params = {}) {
   const doc = context.document || defaultDocument;
   if (!doc || typeof doc.querySelectorAll !== 'function') return false;
   const href = getRouteHref(context, params, 'getHomeHref');
-  if (!href) return false;
   doc.querySelectorAll('[data-site-home]').forEach((link) => {
-    try { link.setAttribute('href', href); } catch (_) {}
+    setHomeLinkHref(link, href);
   });
-  return true;
+  return !!href;
 }
 
 function translate(context = {}, params = {}) {
