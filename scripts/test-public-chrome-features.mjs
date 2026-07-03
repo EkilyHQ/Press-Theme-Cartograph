@@ -26,6 +26,8 @@ const releaseExample = JSON.parse(read('theme-release.example.json'));
 
 assert.equal(manifest.contractVersion, 3);
 assert.equal(manifest.engines.press, '>=3.4.127 <4.0.0');
+assert.equal(releaseExample.contractVersion, 3);
+assert.equal(releaseExample.engines.press, '>=3.4.127 <4.0.0');
 assert.doesNotMatch(source, /href\s*=\s*["']\?tab=posts["']/);
 assert.match(layout, /data-site-home/);
 assert.match(interactions, /siteFeatureContextEnabled/);
