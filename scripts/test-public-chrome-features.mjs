@@ -21,15 +21,23 @@ const layout = read('theme/modules/layout.js');
 const interactions = read('theme/modules/interactions.js');
 const views = read('theme/modules/views.js');
 const source = `${layout}\n${interactions}\n${views}`;
+const manifest = JSON.parse(read('theme/theme.json'));
+const releaseExample = JSON.parse(read('theme-release.example.json'));
 
+assert.equal(manifest.contractVersion, 3);
+assert.equal(manifest.engines.press, '>=3.4.127 <4.0.0');
 assert.doesNotMatch(source, /href\s*=\s*["']\?tab=posts["']/);
 assert.match(layout, /data-site-home/);
 assert.match(interactions, /siteFeatureContextEnabled/);
+assert.match(interactions, /function getRouter[\s\S]*ctx\.router/);
+assert.match(interactions, /function withLang[\s\S]*routerFunction\(context, params, 'withLangParam'\)/);
 assert.match(interactions, /function updateHomeLinks[\s\S]*getHomeSlug[\s\S]*data-site-home/);
+assert.match(interactions, /routerFunction\(context, params, 'searchEnabled'\)/, 'footer search links should use the v3 router search helper');
+assert.ok(releaseExample.files.includes('modules/views.js'), 'example release manifest should include every declared runtime module');
 assert.match(
   interactions,
-  /function updateHomeLinks[\s\S]*__press_get_home_slug[\s\S]*if \(!homeSlug\) return false;[\s\S]*const href = makeHref\(`\?tab=\$\{encodeURIComponent\(homeSlug\)\}`\);/,
-  'identity refresh should use the runtime home helper or preserve existing home hrefs'
+  /function updateHomeLinks[\s\S]*routerFunction\(context, params, 'getHomeSlug'\)[\s\S]*__press_get_home_slug[\s\S]*if \(!homeSlug\) return false;[\s\S]*const href = makeHref\(`\?tab=\$\{encodeURIComponent\(homeSlug\)\}`\);/,
+  'identity refresh should prefer ctx.router home helpers or preserve existing home hrefs'
 );
 
 [
@@ -52,8 +60,13 @@ assert.match(
 assert.match(views, /featureEnabled\(params, 'tags'\)/);
 assert.match(
   views,
-  /const showTags = featureEnabled\(params, 'tags'\);[\s\S]*renderPostMetaCard\(title, metadata \|\| \{\}, params\.markdown \|\| content\.rawMarkdown \|\| '', \{ showTags \}\)/,
-  'shared post meta card should receive the tags feature gate'
+  /const showTags = featureEnabled\(params, 'tags'\) && featureEnabled\(params, 'search'\);[\s\S]*renderPostMetaCard\(title, metadata \|\| \{\}, params\.markdown \|\| content\.rawMarkdown \|\| '', \{ showTags \}\)/,
+  'shared post meta card should receive the tags and search feature gates'
+);
+assert.match(
+  views,
+  /function buildCard\(\[title, meta\][\s\S]*const showTags = featureEnabled\(params, 'tags'\) && featureEnabled\(params, 'search'\);[\s\S]*const tags = showTags && meta \? renderTags\(meta\.tag \|\| meta\.tags\) : '';/,
+  'index/search cards should hide tags when tags or search are disabled'
 );
 assert.match(views, /featureEnabled\(params, 'toc'\)/);
 assert.match(
@@ -74,8 +87,8 @@ assert.match(
 );
 assert.match(
   interactions,
-  /function renderNavLinks[\s\S]*const homeSlug = typeof getHomeSlug === 'function' \? getHomeSlug\(\) : 'posts';[\s\S]*updateHomeLinks\(context, \{ \.\.\.\(params \|\| \{\}\), getHomeSlug: \(\) => homeSlug \}\);/,
-  'nav rendering should pass its computed home fallback into the home link updater'
+  /function renderNavLinks[\s\S]*routerFunction\(context, params, 'getHomeSlug'\)[\s\S]*routerFunction\(context, params, 'postsEnabled'\)[\s\S]*updateHomeLinks\(context, \{ \.\.\.\(params \|\| \{\}\), getHomeSlug: \(\) => homeSlug \}\);/,
+  'nav rendering should prefer ctx.router home/posts helpers before updating home links'
 );
 
 class TestClassList {
