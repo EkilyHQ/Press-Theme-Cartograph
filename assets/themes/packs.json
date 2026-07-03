@@ -2,10 +2,10 @@
   {
     "value": "native",
     "label": "Native",
-    "version": "3.4.1",
-    "contractVersion": 2,
+    "version": "3.4.2",
+    "contractVersion": 3,
     "engines": {
-      "press": ">=3.4.123 <4.0.0"
+      "press": ">=3.4.127 <4.0.0"
     },
     "builtIn": true,
     "removable": false,
@@ -13,7 +13,7 @@
       "type": "builtin"
     },
     "release": {
-      "tag": "v3.4.126"
+      "tag": "v3.4.127"
     },
     "files": [
       "base.css",
@@ -33,10 +33,10 @@
   {
     "value": "cartograph",
     "label": "Cartograph",
-    "version": "3.4.3",
+    "version": "3.4.4",
     "contractVersion": 2,
     "engines": {
-      "press": ">=3.4.121 <4.0.0"
+      "press": ">=3.4.126 <4.0.0"
     },
     "builtIn": false,
     "removable": true,
@@ -46,12 +46,12 @@
       "manifestUrl": "https://raw.githubusercontent.com/EkilyHQ/Press-Theme-Cartograph/main/theme-release.json"
     },
     "release": {
-      "tag": "v3.4.3",
-      "htmlUrl": "https://github.com/EkilyHQ/Press-Theme-Cartograph/releases/tag/v3.4.3",
-      "publishedAt": "2026-06-06T15:11:12Z",
-      "assetName": "press-theme-cartograph-v3.4.3.zip",
-      "size": 18960,
-      "digest": "sha256:0b46895abedb2db4bee13e27b42203cab366bc6e0296891e18ba5e86ec01bdf5"
+      "tag": "v3.4.4",
+      "htmlUrl": "https://github.com/EkilyHQ/Press-Theme-Cartograph/releases/tag/v3.4.4",
+      "publishedAt": "2026-07-02T15:38:32Z",
+      "assetName": "press-theme-cartograph-v3.4.4.zip",
+      "size": 19662,
+      "digest": "sha256:1727e3e91e55a9d2fe609fac1440e10b068446c61ad1a8c14dce7640a191d0f4"
     },
     "files": [
       "modules/interactions.js",

@@ -6,6 +6,7 @@ import {
 } from '../../../js/utils.js';
 import { renderPostMetaCard, renderOutdatedCard } from '../../../js/templates.js';
 import { renderPressPostCardHtml } from '../../../js/post-card-html.js';
+import { siteFeatureContextEnabled } from '../../../js/site-features.js';
 
 const CARD_CLASSES = {
   cardClass: 'cartograph-card',
@@ -32,6 +33,13 @@ function fallbackT(key, ...args) {
 
 function safe(value) {
   return escapeHtml(String(value ?? '')) || '';
+}
+
+function featureEnabled(params = {}, key) {
+  const features = (params && params.features)
+    || (params && params.ctx && params.ctx.features)
+    || (params && params.context && params.context.features);
+  return siteFeatureContextEnabled(features, key);
 }
 
 function firstText(...values) {
@@ -397,9 +405,13 @@ function renderArticleShell(params = {}, options = {}) {
   const metadata = getMetadata(params);
   const title = firstText(options.title, metadata.title, params.fallbackTitle, params.postId, 'Untitled');
   const bodyHtml = firstText(params.markdownHtml, content.html, params.html);
-  const tags = renderTags(metadata.tag || metadata.tags);
-  const metaCard = options.kind === 'post' ? renderPostMetaCard(title, metadata || {}, params.markdown || content.rawMarkdown || '') : '';
-  const outdatedCard = options.kind === 'post' ? renderOutdatedCard(metadata || {}, params.siteConfig || {}) : '';
+  const showTags = featureEnabled(params, 'tags');
+  const showPostMeta = featureEnabled(params, 'postMeta');
+  const tags = showTags ? renderTags(metadata.tag || metadata.tags) : '';
+  const metaCard = showPostMeta && options.kind === 'post'
+    ? renderPostMetaCard(title, metadata || {}, params.markdown || content.rawMarkdown || '', { showTags })
+    : '';
+  const outdatedCard = showPostMeta && options.kind === 'post' ? renderOutdatedCard(metadata || {}, params.siteConfig || {}) : '';
   const routeKind = options.kind === 'tab' ? 'static map' : 'article route';
 
   main.innerHTML = `
@@ -411,7 +423,7 @@ function renderArticleShell(params = {}, options = {}) {
         </div>
         <h1 class="cartograph-article__title">${safe(title)}</h1>
         ${tags ? `<div class="cartograph-article__tags">${tags}</div>` : ''}
-        ${renderStats(content, metadata)}
+        ${showPostMeta ? renderStats(content, metadata) : ''}
         ${(metaCard || outdatedCard) ? `<div class="cartograph-article__notebook">${outdatedCard || ''}${metaCard || ''}</div>` : ''}
       </header>
       <div class="cartograph-prose">${bodyHtml}</div>
@@ -422,7 +434,7 @@ function renderArticleShell(params = {}, options = {}) {
     ...params,
     content,
     articleTitle: title,
-    tocHtml: params.tocHtml || content.tocHtml || ''
+    tocHtml: featureEnabled(params, 'toc') ? (params.tocHtml || content.tocHtml || '') : ''
   });
 
   try {
@@ -439,12 +451,13 @@ function renderArticleShell(params = {}, options = {}) {
 function buildCard([title, meta] = [], siteConfig = {}, params = {}) {
   const { t, withLangParam } = getI18n(params);
   const href = meta && meta.location ? withLangParam(`?id=${encodeURIComponent(meta.location)}`) : '#';
-  const date = meta && meta.date ? formatDisplayDate(meta.date) : '';
-  const tags = meta ? renderTags(meta.tag || meta.tags) : '';
-  const versions = Array.isArray(meta && meta.versions) && meta.versions.length > 1
+  const showPostMeta = featureEnabled(params, 'postMeta');
+  const date = showPostMeta && meta && meta.date ? formatDisplayDate(meta.date) : '';
+  const tags = featureEnabled(params, 'tags') && meta ? renderTags(meta.tag || meta.tags) : '';
+  const versions = showPostMeta && Array.isArray(meta && meta.versions) && meta.versions.length > 1
     ? t('ui.versionsCount', meta.versions.length)
     : '';
-  const draft = meta && meta.draft ? t('ui.draftBadge') : '';
+  const draft = showPostMeta && meta && meta.draft ? t('ui.draftBadge') : '';
   const excerpt = meta && meta.excerpt ? String(meta.excerpt) : '';
   void siteConfig;
   return renderPressPostCardHtml({
