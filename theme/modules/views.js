@@ -71,8 +71,9 @@ function getWindow(params = {}) {
 }
 
 function getI18n(params = {}) {
-  const i18n = (params.ctx && params.ctx.i18n) || {};
-  const router = (params.ctx && params.ctx.router) || {};
+  const context = params.context || {};
+  const i18n = params.i18n || (params.ctx && params.ctx.i18n) || context.i18n || {};
+  const router = (params.ctx && params.ctx.router) || context.router || {};
   const translate = typeof params.translate === 'function'
     ? params.translate
     : (typeof params.translator === 'function'

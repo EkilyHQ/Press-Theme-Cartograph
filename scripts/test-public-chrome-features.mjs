@@ -92,6 +92,16 @@ assert.match(
   /function renderNavLinks[\s\S]*routerFunction\(context, params, 'getHomeSlug'\)[\s\S]*routerFunction\(context, params, 'postsEnabled'\)[\s\S]*updateHomeLinks\(context, \{ \.\.\.\(params \|\| \{\}\), getHomeSlug: \(\) => homeSlug \}\);/,
   'nav rendering should prefer ctx.router home/posts helpers before updating home links'
 );
+assert.match(
+  interactions,
+  /renderSiteIdentity\(params = \{\}\)[\s\S]*updateHomeLinks\(localContext, params\)/,
+  'identity rendering should preserve context router helpers when refreshing home links'
+);
+assert.match(
+  views,
+  /function getI18n\(params = \{\}\)[\s\S]*const context = params\.context \|\| \{\};[\s\S]*context\.router/,
+  'view rendering should resolve language helpers from params.context.router'
+);
 
 class TestClassList {
   constructor(element) {
@@ -449,6 +459,18 @@ api.effects.renderSiteIdentity({
   withLangParam: (href) => href
 });
 assert.equal(harness.elements.home.getAttribute('href'), '?tab=about', 'identity refresh without home helpers should preserve home href');
+harness.elements.home.setAttribute('href', '#');
+api.effects.renderSiteIdentity({
+  features,
+  config: { siteTitle: 'Product localized' },
+  context: {
+    router: {
+      getHomeSlug: () => 'localized-home',
+      withLangParam: (href) => `${href}&lang=ja`
+    }
+  }
+});
+assert.equal(harness.elements.home.getAttribute('href'), '?tab=localized-home&lang=ja', 'identity refresh should use params.context router helpers');
 
 api.effects.renderSiteLinks({
   features,
@@ -564,6 +586,29 @@ viewsModule.renderIndexView({
   siteConfig: {}
 });
 assert.doesNotMatch(harness.elements.main.innerHTML, /2026|versionsCount|draftBadge|alpha/, 'disabled postMeta/tags should hide index card metadata and tags');
+
+viewsModule.renderIndexView({
+  ctx: {
+    document: harness.doc,
+    window: harness.doc.defaultView,
+    regions: harness.regions,
+    i18n: context.i18n
+  },
+  context: {
+    router: {
+      withLangParam: (href) => `${href}&lang=ja`
+    }
+  },
+  containers: {
+    mainElement: harness.elements.main
+  },
+  features,
+  pageEntries: [['Product', {
+    location: 'product.md'
+  }]],
+  siteConfig: {}
+});
+assert.match(harness.elements.main.innerHTML, /href="\?id=product\.md&amp;lang=ja"/, 'index cards should use params.context router language helper');
 
 viewsModule.renderSearchResults({
   ctx: {

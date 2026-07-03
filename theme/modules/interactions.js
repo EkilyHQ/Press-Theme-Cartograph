@@ -504,8 +504,9 @@ function createEffects(context = {}) {
       return hideElement(element, onDone);
     },
 
-    renderSiteIdentity({ config, ctx, getHomeSlug, features } = {}) {
-      updateHomeLinks(localContext, { ctx, getHomeSlug, features });
+    renderSiteIdentity(params = {}) {
+      const { config } = params;
+      updateHomeLinks(localContext, params);
       const title = localized(localContext, config, 'siteTitle') || 'Press';
       const subtitle = localized(localContext, config, 'siteSubtitle');
       doc.querySelectorAll('[data-site-title], [data-site-title-rail]').forEach((node) => { node.textContent = title; });
