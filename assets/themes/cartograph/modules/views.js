@@ -71,7 +71,9 @@ function getWindow(params = {}) {
 }
 
 function getI18n(params = {}) {
-  const i18n = (params.ctx && params.ctx.i18n) || {};
+  const context = params.context || {};
+  const i18n = params.i18n || (params.ctx && params.ctx.i18n) || context.i18n || {};
+  const router = (params.ctx && params.ctx.router) || context.router || {};
   const translate = typeof params.translate === 'function'
     ? params.translate
     : (typeof params.translator === 'function'
@@ -79,7 +81,9 @@ function getI18n(params = {}) {
         : (typeof i18n.t === 'function' ? i18n.t : fallbackT));
   const withLanguage = typeof params.withLangParam === 'function'
     ? params.withLangParam
-    : (typeof i18n.withLangParam === 'function' ? i18n.withLangParam : (href) => href);
+    : (typeof router.withLangParam === 'function'
+        ? router.withLangParam
+        : (typeof i18n.withLangParam === 'function' ? i18n.withLangParam : (href) => href));
   return { t: translate, withLangParam: withLanguage };
 }
 
@@ -405,7 +409,7 @@ function renderArticleShell(params = {}, options = {}) {
   const metadata = getMetadata(params);
   const title = firstText(options.title, metadata.title, params.fallbackTitle, params.postId, 'Untitled');
   const bodyHtml = firstText(params.markdownHtml, content.html, params.html);
-  const showTags = featureEnabled(params, 'tags');
+  const showTags = featureEnabled(params, 'tags') && featureEnabled(params, 'search');
   const showPostMeta = featureEnabled(params, 'postMeta');
   const tags = showTags ? renderTags(metadata.tag || metadata.tags) : '';
   const metaCard = showPostMeta && options.kind === 'post'
@@ -453,7 +457,8 @@ function buildCard([title, meta] = [], siteConfig = {}, params = {}) {
   const href = meta && meta.location ? withLangParam(`?id=${encodeURIComponent(meta.location)}`) : '#';
   const showPostMeta = featureEnabled(params, 'postMeta');
   const date = showPostMeta && meta && meta.date ? formatDisplayDate(meta.date) : '';
-  const tags = featureEnabled(params, 'tags') && meta ? renderTags(meta.tag || meta.tags) : '';
+  const showTags = featureEnabled(params, 'tags') && featureEnabled(params, 'search');
+  const tags = showTags && meta ? renderTags(meta.tag || meta.tags) : '';
   const versions = showPostMeta && Array.isArray(meta && meta.versions) && meta.versions.length > 1
     ? t('ui.versionsCount', meta.versions.length)
     : '';

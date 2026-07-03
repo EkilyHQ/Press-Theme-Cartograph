@@ -26,6 +26,18 @@ function featureEnabled(params = {}, key, context = {}) {
   return siteFeatureContextEnabled(features, key);
 }
 
+function getRouter(context = {}, params = {}) {
+  return (params && params.ctx && params.ctx.router)
+    || (params && params.context && params.context.router)
+    || (context && context.router)
+    || {};
+}
+
+function routerFunction(context = {}, params = {}, name) {
+  const router = getRouter(context, params);
+  return router && typeof router[name] === 'function' ? router[name] : null;
+}
+
 function setChromeHidden(element, hidden) {
   if (!element) return;
   try { element.hidden = !!hidden; } catch (_) {}
@@ -39,9 +51,10 @@ function updateHomeLinks(context = {}, params = {}) {
   const doc = context.document || defaultDocument;
   if (!doc || typeof doc.querySelectorAll !== 'function') return false;
   const win = params.window || context.window || defaultWindow;
-  const getHomeSlug = typeof params.getHomeSlug === 'function'
+  const getHomeSlug = routerFunction(context, params, 'getHomeSlug')
+    || (typeof params.getHomeSlug === 'function'
     ? params.getHomeSlug
-    : (win && typeof win.__press_get_home_slug === 'function' ? win.__press_get_home_slug : null);
+    : (win && typeof win.__press_get_home_slug === 'function' ? win.__press_get_home_slug : null));
   const makeHref = withLang(context, params);
   const homeSlug = getHomeSlug ? String(getHomeSlug() || '').trim() : '';
   if (!homeSlug) return false;
@@ -83,6 +96,8 @@ function currentLang(context = {}, params = {}) {
 }
 
 function withLang(context = {}, params = {}) {
+  const routerWithLang = routerFunction(context, params, 'withLangParam');
+  if (routerWithLang) return routerWithLang;
   if (typeof params.withLangParam === 'function') return params.withLangParam;
   try {
     if (context.i18n && typeof context.i18n.withLangParam === 'function') return context.i18n.withLangParam;
@@ -311,9 +326,11 @@ function renderNavLinks(nav, tabsBySlug, activeSlug, postsEnabled, getHomeSlug, 
   const t = translate(context, params);
   const makeHref = withLang(context, params);
   const items = [];
-  const homeSlug = typeof getHomeSlug === 'function' ? getHomeSlug() : 'posts';
+  const getHome = routerFunction(context, params, 'getHomeSlug') || (typeof getHomeSlug === 'function' ? getHomeSlug : null);
+  const postsEnabledFn = routerFunction(context, params, 'postsEnabled') || (typeof postsEnabled === 'function' ? postsEnabled : () => true);
+  const homeSlug = getHome ? getHome() : 'posts';
   updateHomeLinks(context, { ...(params || {}), getHomeSlug: () => homeSlug });
-  if (!postsEnabled || postsEnabled()) {
+  if (postsEnabledFn()) {
     items.push({ slug: 'posts', label: t('ui.allPosts'), href: makeHref('?tab=posts') });
   }
   Object.entries(tabsBySlug || {}).forEach(([slug, info]) => {
@@ -340,14 +357,18 @@ function renderFooterLinks(root, tabsBySlug, postsEnabled, getHomeSlug, getHomeL
   const t = translate(context, params);
   const makeHref = withLang(context, params);
   const links = [];
-  const homeSlug = typeof getHomeSlug === 'function' ? getHomeSlug() : 'posts';
-  const homeLabel = typeof getHomeLabel === 'function' ? getHomeLabel() : t('ui.allPosts');
+  const getHome = routerFunction(context, params, 'getHomeSlug') || getHomeSlug;
+  const getLabel = routerFunction(context, params, 'getHomeLabel') || getHomeLabel;
+  const homeSlug = typeof getHome === 'function' ? getHome() : 'posts';
+  const homeLabel = typeof getLabel === 'function' ? getLabel() : t('ui.allPosts');
   if (homeSlug) links.push({ href: makeHref(`?tab=${encodeURIComponent(homeSlug)}`), label: homeLabel });
   Object.entries(tabsBySlug || {}).forEach(([slug, info]) => {
     if (slug === homeSlug) return;
     links.push({ href: makeHref(`?tab=${encodeURIComponent(slug)}`), label: (info && info.title) || slug });
   });
-  if (featureEnabled(params, 'search', context)) links.push({ href: makeHref('?tab=search'), label: t('ui.searchTab') });
+  const searchEnabledFn = routerFunction(context, params, 'searchEnabled');
+  const searchEnabled = searchEnabledFn ? searchEnabledFn() : featureEnabled(params, 'search', context);
+  if (searchEnabled) links.push({ href: makeHref('?tab=search'), label: t('ui.searchTab') });
   root.innerHTML = links.map((link) => `<a href="${safe(link.href)}">${safe(link.label)}</a>`).join('');
   return true;
 }
@@ -483,8 +504,9 @@ function createEffects(context = {}) {
       return hideElement(element, onDone);
     },
 
-    renderSiteIdentity({ config, getHomeSlug, features } = {}) {
-      updateHomeLinks(localContext, { getHomeSlug, features });
+    renderSiteIdentity(params = {}) {
+      const { config } = params;
+      updateHomeLinks(localContext, params);
       const title = localized(localContext, config, 'siteTitle') || 'Press';
       const subtitle = localized(localContext, config, 'siteSubtitle');
       doc.querySelectorAll('[data-site-title], [data-site-title-rail]').forEach((node) => { node.textContent = title; });
