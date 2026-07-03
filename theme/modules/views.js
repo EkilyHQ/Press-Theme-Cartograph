@@ -87,6 +87,23 @@ function getI18n(params = {}) {
   return { t: translate, withLangParam: withLanguage };
 }
 
+function getRouter(params = {}) {
+  const context = params.context || {};
+  return (params.ctx && params.ctx.router) || context.router || {};
+}
+
+function getRouteHref(params = {}, name, ...args) {
+  const router = getRouter(params);
+  const helper = router && typeof router[name] === 'function' ? router[name] : null;
+  if (!helper) return null;
+  try {
+    const href = helper(...args);
+    return href ? String(href) : null;
+  } catch (_) {
+    return null;
+  }
+}
+
 function getRegion(params = {}, names, fallbackSelector = '') {
   const list = Array.isArray(names) ? names : [names];
   const regions = params.ctx && params.ctx.regions;
@@ -341,7 +358,7 @@ function renderStats(content = {}, metadata = {}) {
 function decorateArticle(container, params = {}) {
   if (!container) return;
   const utilities = params.utilities || {};
-  const { t, withLangParam } = getI18n(params);
+  const { t } = getI18n(params);
   const body = container.querySelector('.cartograph-prose') || container;
 
   try { if (typeof utilities.hydratePostImages === 'function') utilities.hydratePostImages(body); } catch (_) {}
@@ -358,7 +375,7 @@ function decorateArticle(container, params = {}) {
         postsIndexCache: params.postsIndex || {},
         siteConfig: params.siteConfig || {},
         translate: params.translate || t,
-        makeHref: utilities.makeLangHref || ((loc) => withLangParam(`?id=${encodeURIComponent(loc)}`)),
+        makeHref: utilities.makeLangHref || ((loc) => getRouteHref(params, 'getPostHref', loc)),
         fetchMarkdown: utilities.fetchMarkdown || (() => Promise.resolve(''))
       });
     }
@@ -390,7 +407,9 @@ function decorateArticle(container, params = {}) {
       const target = versionSelect.value;
       if (!target) return;
       const win = getWindow(params);
-      try { win.location.href = withLangParam(`?id=${encodeURIComponent(target)}`); } catch (_) {}
+      const href = getRouteHref(params, 'getPostHref', target);
+      if (!href) return;
+      try { win.location.href = href; } catch (_) {}
     });
   }
 
@@ -453,8 +472,9 @@ function renderArticleShell(params = {}, options = {}) {
 }
 
 function buildCard([title, meta] = [], siteConfig = {}, params = {}) {
-  const { t, withLangParam } = getI18n(params);
-  const href = meta && meta.location ? withLangParam(`?id=${encodeURIComponent(meta.location)}`) : '#';
+  const { t } = getI18n(params);
+  const href = meta && meta.location ? getRouteHref(params, 'getPostHref', meta.location) : '';
+  if (!href) return '';
   const showPostMeta = featureEnabled(params, 'postMeta');
   const date = showPostMeta && meta && meta.date ? formatDisplayDate(meta.date) : '';
   const showTags = featureEnabled(params, 'tags') && featureEnabled(params, 'search');
@@ -477,31 +497,30 @@ function buildCard([title, meta] = [], siteConfig = {}, params = {}) {
   });
 }
 
-function buildPagination({ page, totalPages, baseHref, query = {}, translate = fallbackT } = {}) {
+function buildPagination({ page, totalPages, makeHref, translate = fallbackT } = {}) {
   const t = typeof translate === 'function' ? translate : fallbackT;
   if (!totalPages || totalPages <= 1) return '';
-  const win = typeof window !== 'undefined' ? window : null;
-  const makeHref = (targetPage) => {
+  const makePageHref = (targetPage) => {
+    if (typeof makeHref !== 'function') return '';
     try {
-      const url = new URL(baseHref, win ? win.location.href : 'https://example.invalid/');
-      url.searchParams.set('page', String(targetPage));
-      if (query.q) url.searchParams.set('q', query.q);
-      if (query.tag) url.searchParams.set('tag', query.tag);
-      return url.toString();
-    } catch (_) {
-      return baseHref;
-    }
+      const href = makeHref(targetPage);
+      return href ? String(href) : '';
+    } catch (_) { return ''; }
   };
   const pages = [];
+  const renderPageControl = (href, label, className) => href
+    ? `<a class="${safe(className)}" href="${safe(href)}">${safe(label)}</a>`
+    : `<span class="${safe(`${className} is-disabled`.trim())}" aria-disabled="true">${safe(label)}</span>`;
   for (let i = 1; i <= totalPages; i += 1) {
-    pages.push(`<a class="cartograph-page${i === page ? ' is-current' : ''}" href="${safe(makeHref(i))}">${i}</a>`);
+    const href = makePageHref(i);
+    pages.push(renderPageControl(href, String(i), `cartograph-page${i === page ? ' is-current' : ''}`));
   }
-  const prev = page > 1 ? makeHref(page - 1) : '';
-  const next = page < totalPages ? makeHref(page + 1) : '';
+  const prev = page > 1 ? makePageHref(page - 1) : '';
+  const next = page < totalPages ? makePageHref(page + 1) : '';
   return `<nav class="cartograph-pagination" aria-label="${safe(t('ui.pagination'))}">
-    <a class="cartograph-page${prev ? '' : ' is-disabled'}" href="${safe(prev || '#')}" ${prev ? '' : 'aria-disabled="true"'}>${safe(t('ui.prev'))}</a>
+    ${renderPageControl(prev, t('ui.prev'), 'cartograph-page')}
     <div class="cartograph-pagination__pages">${pages.join('')}</div>
-    <a class="cartograph-page${next ? '' : ' is-disabled'}" href="${safe(next || '#')}" ${next ? '' : 'aria-disabled="true"'}>${safe(t('ui.next'))}</a>
+    ${renderPageControl(next, t('ui.next'), 'cartograph-page')}
   </nav>`;
 }
 
@@ -517,7 +536,7 @@ export function renderStaticTabView(params = {}) {
 export function renderIndexView(params = {}) {
   const container = getMain(params);
   if (!container) return false;
-  const { t, withLangParam } = getI18n(params);
+  const { t } = getI18n(params);
   const entries = Array.isArray(params.pageEntries) ? params.pageEntries : [];
   const cards = entries.map((entry) => buildCard(entry, params.siteConfig || {}, params)).join('');
   container.innerHTML = `<section class="cartograph-atlas index">
@@ -526,7 +545,7 @@ export function renderIndexView(params = {}) {
       <h1>${safe(t('titles.allPosts'))}</h1>
     </header>
     <div class="cartograph-atlas__grid">${cards || `<p class="cartograph-empty">${safe(t('ui.noResultsTitle'))}</p>`}</div>
-    ${buildPagination({ page: params.page, totalPages: params.totalPages, baseHref: withLangParam('?tab=posts'), translate: t })}
+    ${buildPagination({ page: params.page, totalPages: params.totalPages, makeHref: (page) => getRouteHref(params, 'getPostsHref', { page }), translate: t })}
   </section>`;
   resetContentLegend(params);
   scrollToBoardTop(params);
@@ -536,7 +555,7 @@ export function renderIndexView(params = {}) {
 export function renderSearchResults(params = {}) {
   const container = getMain(params);
   if (!container) return false;
-  const { t, withLangParam } = getI18n(params);
+  const { t } = getI18n(params);
   const entries = Array.isArray(params.entries) ? params.entries : [];
   const label = params.tagFilter
     ? `${t('ui.tags')} / ${params.tagFilter}`
@@ -551,8 +570,7 @@ export function renderSearchResults(params = {}) {
     ${buildPagination({
       page: params.page,
       totalPages: params.totalPages,
-      baseHref: withLangParam('?tab=search'),
-      query: { q: params.query || '', tag: params.tagFilter || '' },
+      makeHref: (page) => getRouteHref(params, 'getSearchHref', { q: params.query || '', tag: params.tagFilter || '', page }),
       translate: t
     })}
   </section>`;
