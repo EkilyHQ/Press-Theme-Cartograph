@@ -633,8 +633,15 @@ viewsModule.renderIndexView({
   },
   context: {
     router: {
-      getPostHref: (location) => `?id=${location}&lang=ja`,
-      getPostsHref: ({ page } = {}) => `?tab=posts&page=${page || 1}&lang=ja`
+      postPrefix: '?id=',
+      postsPrefix: '?tab=posts&page=',
+      suffix: '&lang=ja',
+      getPostHref(location) {
+        return `${this.postPrefix}${location}${this.suffix}`;
+      },
+      getPostsHref({ page } = {}) {
+        return `${this.postsPrefix}${page || 1}${this.suffix}`;
+      }
     }
   },
   containers: {
