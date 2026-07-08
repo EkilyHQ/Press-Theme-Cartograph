@@ -12,7 +12,8 @@ function resolvePressRoot() {
   candidates.push(resolve(root, '.press'));
   candidates.push(resolve(root, '..', 'Press'));
   const found = candidates.find((candidate) => existsSync(resolve(candidate, 'assets/js/site-features.js')));
-  return found || candidates[0];
+  if (found) return found;
+  throw new Error(`Press checkout not found for behavior probes. Set PRESS_ROOT or place Press at ../Press. Checked: ${candidates.join(', ')}`);
 }
 const pressRoot = resolvePressRoot();
 const read = (path) => readFileSync(resolve(root, path), 'utf8');
@@ -24,22 +25,25 @@ const source = `${layout}\n${interactions}\n${views}`;
 const manifest = JSON.parse(read('theme/theme.json'));
 const releaseExample = JSON.parse(read('theme-release.example.json'));
 
-assert.equal(manifest.contractVersion, 3);
-assert.equal(manifest.engines.press, '>=3.4.127 <4.0.0');
-assert.equal(releaseExample.contractVersion, 3);
-assert.equal(releaseExample.engines.press, '>=3.4.127 <4.0.0');
-assert.doesNotMatch(source, /href\s*=\s*["']\?tab=posts["']/);
+assert.equal(manifest.contractVersion, 4);
+assert.equal(manifest.engines.press, '>=3.4.130 <4.0.0');
+assert.equal(releaseExample.contractVersion, 4);
+assert.equal(releaseExample.engines.press, '>=3.4.130 <4.0.0');
+assert.doesNotMatch(source, /[?&](?:tab|id)=/, 'v4 packaged source should use router href helpers for public routes');
+assert.doesNotMatch(source, /getRouteHref[\s\S]{0,160}\|\|\s*'#'/, 'v4 route helper null results should not become hash dead links');
+assert.doesNotMatch(layout, /<a[^>]*href="#"[^>]*data-site-home|<a[^>]*data-site-home[^>]*href="#"/, 'brand home link should not start as a hash dead link');
 assert.match(layout, /data-site-home/);
 assert.match(interactions, /siteFeatureContextEnabled/);
 assert.match(interactions, /function getRouter[\s\S]*ctx\.router/);
-assert.match(interactions, /function withLang[\s\S]*routerFunction\(context, params, 'withLangParam'\)/);
-assert.match(interactions, /function updateHomeLinks[\s\S]*getHomeSlug[\s\S]*data-site-home/);
-assert.match(interactions, /routerFunction\(context, params, 'searchEnabled'\)/, 'footer search links should use the v3 router search helper');
+assert.match(interactions, /function getRouteHref[\s\S]*routerFunction\(context, params, name\)/);
+assert.match(interactions, /function updateHomeLinks[\s\S]*getRouteHref\(context, params, 'getHomeHref'\)[\s\S]*data-site-home/);
+assert.match(interactions, /getRouteHref\(context, params, 'getSearchHref'\)/, 'footer search links should use the v4 router search href helper');
+assert.doesNotMatch(interactions, /renderDefaultTags/);
 assert.ok(releaseExample.files.includes('modules/views.js'), 'example release manifest should include every declared runtime module');
 assert.match(
   interactions,
-  /function updateHomeLinks[\s\S]*routerFunction\(context, params, 'getHomeSlug'\)[\s\S]*__press_get_home_slug[\s\S]*if \(!homeSlug\) return false;[\s\S]*const href = makeHref\(`\?tab=\$\{encodeURIComponent\(homeSlug\)\}`\);/,
-  'identity refresh should prefer ctx.router home helpers or preserve existing home hrefs'
+  /function updateHomeLinks[\s\S]*getRouteHref\(context, params, 'getHomeHref'\)[\s\S]*setHomeLinkHref\(link, href\)/,
+  'identity refresh should use the v4 home href helper and disable home links when no href is available'
 );
 
 [
@@ -67,8 +71,13 @@ assert.match(
 );
 assert.match(
   views,
-  /function buildCard\(\[title, meta\][\s\S]*const showTags = featureEnabled\(params, 'tags'\) && featureEnabled\(params, 'search'\);[\s\S]*const tags = showTags && meta \? renderTags\(meta\.tag \|\| meta\.tags\) : '';/,
+  /function buildCard\(\[title, meta\][\s\S]*if \(!href\) return '';[\s\S]*const showTags = featureEnabled\(params, 'tags'\) && featureEnabled\(params, 'search'\);[\s\S]*const tags = showTags && meta \? renderTags\(meta\.tag \|\| meta\.tags\) : '';/,
   'index/search cards should hide tags when tags or search are disabled'
+);
+assert.match(
+  views,
+  /function buildPagination\([\s\S]*renderPageControl[\s\S]*<span class="\$\{safe\(`\$\{className\} is-disabled`\.trim\(\)\)\}" aria-disabled="true">/,
+  'pagination should render disabled spans rather than hash links when route helpers return null'
 );
 assert.match(views, /featureEnabled\(params, 'toc'\)/);
 assert.match(
@@ -89,8 +98,8 @@ assert.match(
 );
 assert.match(
   interactions,
-  /function renderNavLinks[\s\S]*routerFunction\(context, params, 'getHomeSlug'\)[\s\S]*routerFunction\(context, params, 'postsEnabled'\)[\s\S]*updateHomeLinks\(context, \{ \.\.\.\(params \|\| \{\}\), getHomeSlug: \(\) => homeSlug \}\);/,
-  'nav rendering should prefer ctx.router home/posts helpers before updating home links'
+  /function renderNavLinks[\s\S]*getRouteHref\(context, params, 'getPostsHref'\)[\s\S]*getRouteHref\(context, params, 'getTabHref', slug\)/,
+  'nav rendering should use v4 posts and tab href helpers'
 );
 assert.match(
   interactions,
@@ -99,8 +108,8 @@ assert.match(
 );
 assert.match(
   views,
-  /function getI18n\(params = \{\}\)[\s\S]*const context = params\.context \|\| \{\};[\s\S]*context\.router/,
-  'view rendering should resolve language helpers from params.context.router'
+  /function getRouteHref\(params = \{\}, name[\s\S]*router\[name\]/,
+  'view rendering should resolve route href helpers from params.context.router'
 );
 
 class TestClassList {
@@ -424,6 +433,20 @@ const context = {
   window: harness.doc.defaultView,
   regions: harness.regions,
   features,
+  router: {
+    homeHref: '?tab=about',
+    getHomeHref() {
+      return this.homeHref;
+    },
+    getHomeSlug: () => 'about',
+    getHomeLabel: () => 'About',
+    getTabHref: (slug) => `?tab=${slug}`,
+    getPostHref: (location) => `?id=${location}`,
+    getPostsHref: () => null,
+    getSearchHref: () => null,
+    postsEnabled: () => false,
+    searchEnabled: () => false
+  },
   i18n: {
     t: (key, value) => (value ? `${key}:${value}` : key),
     withLangParam: (href) => href
@@ -465,12 +488,26 @@ api.effects.renderSiteIdentity({
   config: { siteTitle: 'Product localized' },
   context: {
     router: {
-      getHomeSlug: () => 'localized-home',
-      withLangParam: (href) => `${href}&lang=ja`
+      homeHref: '?tab=localized-home&lang=ja',
+      getHomeHref() {
+        return this.homeHref;
+      }
     }
   }
 });
 assert.equal(harness.elements.home.getAttribute('href'), '?tab=localized-home&lang=ja', 'identity refresh should use params.context router helpers');
+api.effects.renderSiteIdentity({
+  features,
+  config: { siteTitle: 'Product unreachable home' },
+  context: {
+    router: {
+      getHomeHref: () => null
+    }
+  }
+});
+assert.equal(harness.elements.home.getAttribute('href'), null, 'null home helper should remove stale home hrefs');
+assert.equal(harness.elements.home.getAttribute('aria-disabled'), 'true', 'null home helper should disable home links');
+assert.equal(harness.elements.home.getAttribute('tabindex'), '-1', 'null home helper should remove home links from tab order');
 
 api.effects.renderSiteLinks({
   features,
@@ -596,7 +633,15 @@ viewsModule.renderIndexView({
   },
   context: {
     router: {
-      withLangParam: (href) => `${href}&lang=ja`
+      postPrefix: '?id=',
+      postsPrefix: '?tab=posts&page=',
+      suffix: '&lang=ja',
+      getPostHref(location) {
+        return `${this.postPrefix}${location}${this.suffix}`;
+      },
+      getPostsHref({ page } = {}) {
+        return `${this.postsPrefix}${page || 1}${this.suffix}`;
+      }
     }
   },
   containers: {
@@ -631,5 +676,56 @@ viewsModule.renderSearchResults({
   siteConfig: {}
 });
 assert.doesNotMatch(harness.elements.main.innerHTML, /2026|versionsCount|draftBadge|alpha/, 'disabled postMeta/tags should hide search card metadata and tags');
+
+viewsModule.renderIndexView({
+  ctx: {
+    document: harness.doc,
+    window: harness.doc.defaultView,
+    regions: harness.regions,
+    i18n: context.i18n,
+    router: {
+      getPostHref: () => null,
+      getPostsHref: () => null
+    }
+  },
+  containers: {
+    mainElement: harness.elements.main
+  },
+  features,
+  page: 1,
+  totalPages: 2,
+  pageEntries: [['Product', {
+    location: 'product.md'
+  }]],
+  siteConfig: {}
+});
+assert.doesNotMatch(harness.elements.main.innerHTML, /href="(?:#|)"/, 'null route helpers should not render empty or hash links');
+assert.match(harness.elements.main.innerHTML, /aria-disabled="true"/, 'null pagination helpers should render disabled text controls');
+
+viewsModule.renderSearchResults({
+  ctx: {
+    document: harness.doc,
+    window: harness.doc.defaultView,
+    regions: harness.regions,
+    i18n: context.i18n,
+    router: {
+      getPostHref: () => null,
+      getSearchHref: () => null
+    }
+  },
+  containers: {
+    mainElement: harness.elements.main
+  },
+  features,
+  page: 2,
+  totalPages: 3,
+  query: 'Product',
+  entries: [['Product', {
+    location: 'product.md'
+  }]],
+  siteConfig: {}
+});
+assert.doesNotMatch(harness.elements.main.innerHTML, /href="(?:#|)"/, 'null search route helpers should not render empty or hash links');
+assert.match(harness.elements.main.innerHTML, /aria-disabled="true"/, 'null search pagination helpers should render disabled text controls');
 
 console.log('ok - Cartograph public chrome feature gates');
