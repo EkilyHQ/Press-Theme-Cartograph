@@ -434,7 +434,10 @@ const context = {
   regions: harness.regions,
   features,
   router: {
-    getHomeHref: () => '?tab=about',
+    homeHref: '?tab=about',
+    getHomeHref() {
+      return this.homeHref;
+    },
     getHomeSlug: () => 'about',
     getHomeLabel: () => 'About',
     getTabHref: (slug) => `?tab=${slug}`,
@@ -485,7 +488,10 @@ api.effects.renderSiteIdentity({
   config: { siteTitle: 'Product localized' },
   context: {
     router: {
-      getHomeHref: () => '?tab=localized-home&lang=ja'
+      homeHref: '?tab=localized-home&lang=ja',
+      getHomeHref() {
+        return this.homeHref;
+      }
     }
   }
 });

@@ -34,7 +34,7 @@ function getRouter(context = {}, params = {}) {
 
 function routerFunction(context = {}, params = {}, name) {
   const router = getRouter(context, params);
-  return router && typeof router[name] === 'function' ? router[name] : null;
+  return router && typeof router[name] === 'function' ? router[name].bind(router) : null;
 }
 
 function getRouteHref(context = {}, params = {}, name, ...args) {
