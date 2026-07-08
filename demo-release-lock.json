@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "type": "press-theme-demo-release-lock",
+  "repository": "EkilyHQ/Press-Theme-Cartograph",
+  "slug": "cartograph",
+  "target": {
+    "category": "themeDemo",
+    "ref": "demo",
+    "path": "demo-release-lock.json",
+    "type": "theme-demo-release-lock",
+    "reconciler": "theme-demo-release-sync",
+    "observed": {
+      "pressSystem": {
+        "path": "assets/press-system.json",
+        "type": "press-system-manifest"
+      },
+      "themeManifest": {
+        "path": "assets/themes/cartograph/theme.json",
+        "type": "press-theme-manifest"
+      },
+      "themePacks": {
+        "path": "assets/themes/packs.json",
+        "type": "press-theme-packs"
+      }
+    }
+  },
+  "pressSystem": {
+    "version": "3.4.132",
+    "tag": "v3.4.132",
+    "sourceKind": "release-intent",
+    "releaseUrl": "https://github.com/EkilyHQ/Press/releases/tag/v3.4.132",
+    "asset": {
+      "name": "press-system-v3.4.132.zip",
+      "url": "https://raw.githubusercontent.com/EkilyHQ/Press/release-artifacts/v3.4.132/press-system-v3.4.132.zip",
+      "size": 1986886,
+      "digest": "sha256:e7724b10c511a8b00e25ba8ffe7976ac8b8865c1a691fe03c8412952b4965f51"
+    },
+    "releaseIntent": {
+      "type": "press-release-intent",
+      "source": "https://raw.githubusercontent.com/EkilyHQ/Press/release-artifacts/v3.4.132/release-intent.json"
+    },
+    "upgradeFrom": {
+      "ranges": [
+        ">=3.4.131 <3.4.132"
+      ],
+      "allowUnknownSource": false,
+      "message": "Update to v3.4.131 before installing v3.4.132."
+    }
+  },
+  "theme": {
+    "value": "cartograph",
+    "label": "Cartograph",
+    "version": "3.4.6",
+    "contractVersion": 4,
+    "engines": {
+      "press": ">=3.4.130 <4.0.0"
+    },
+    "release": {
+      "tag": "v3.4.6",
+      "htmlUrl": "https://github.com/EkilyHQ/Press-Theme-Cartograph/releases/tag/v3.4.6",
+      "publishedAt": "2026-07-08T05:56:57Z",
+      "notes": ""
+    },
+    "asset": {
+      "name": "press-theme-cartograph-v3.4.6.zip",
+      "url": "https://raw.githubusercontent.com/EkilyHQ/Press-Theme-Cartograph/release-artifacts/v3.4.6/press-theme-cartograph-v3.4.6.zip",
+      "size": 19990,
+      "digest": "sha256:ed332d0784dcdd1d0f7c6f28d2595098ec2864f8638e18e68fea67bbcc37f950"
+    },
+    "releaseManifest": {
+      "source": "https://raw.githubusercontent.com/EkilyHQ/Press-Theme-Cartograph/main/theme-release.json"
+    }
+  }
+}
