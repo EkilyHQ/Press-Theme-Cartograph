@@ -3,7 +3,6 @@ import {
   mountThemeControls,
   applySavedTheme
 } from '../../../js/theme.js';
-import { renderTagSidebar as renderDefaultTags } from '../../../js/tags.js';
 import { prefersReducedMotion } from '../../../js/dom-utils.js';
 import { siteFeatureContextEnabled } from '../../../js/site-features.js';
 import {
@@ -35,7 +34,18 @@ function getRouter(context = {}, params = {}) {
 
 function routerFunction(context = {}, params = {}, name) {
   const router = getRouter(context, params);
-  return router && typeof router[name] === 'function' ? router[name] : null;
+  return router && typeof router[name] === 'function' ? router[name].bind(router) : null;
+}
+
+function getRouteHref(context = {}, params = {}, name, ...args) {
+  const helper = routerFunction(context, params, name);
+  if (!helper) return null;
+  try {
+    const href = helper(...args);
+    return href ? String(href) : null;
+  } catch (_) {
+    return null;
+  }
 }
 
 function setChromeHidden(element, hidden) {
@@ -47,22 +57,27 @@ function setChromeHidden(element, hidden) {
   } catch (_) {}
 }
 
+function setHomeLinkHref(link, href) {
+  if (!link) return;
+  if (!href) {
+    try { link.removeAttribute('href'); } catch (_) {}
+    try { link.setAttribute('aria-disabled', 'true'); } catch (_) {}
+    try { link.setAttribute('tabindex', '-1'); } catch (_) {}
+    return;
+  }
+  try { link.setAttribute('href', href); } catch (_) {}
+  try { link.removeAttribute('aria-disabled'); } catch (_) {}
+  try { link.removeAttribute('tabindex'); } catch (_) {}
+}
+
 function updateHomeLinks(context = {}, params = {}) {
   const doc = context.document || defaultDocument;
   if (!doc || typeof doc.querySelectorAll !== 'function') return false;
-  const win = params.window || context.window || defaultWindow;
-  const getHomeSlug = routerFunction(context, params, 'getHomeSlug')
-    || (typeof params.getHomeSlug === 'function'
-    ? params.getHomeSlug
-    : (win && typeof win.__press_get_home_slug === 'function' ? win.__press_get_home_slug : null));
-  const makeHref = withLang(context, params);
-  const homeSlug = getHomeSlug ? String(getHomeSlug() || '').trim() : '';
-  if (!homeSlug) return false;
-  const href = makeHref(`?tab=${encodeURIComponent(homeSlug)}`);
+  const href = getRouteHref(context, params, 'getHomeHref');
   doc.querySelectorAll('[data-site-home]').forEach((link) => {
-    try { link.setAttribute('href', href); } catch (_) {}
+    setHomeLinkHref(link, href);
   });
-  return true;
+  return !!href;
 }
 
 function translate(context = {}, params = {}) {
@@ -324,18 +339,19 @@ function renderLinksList(root, config, context, params = {}) {
 function renderNavLinks(nav, tabsBySlug, activeSlug, postsEnabled, getHomeSlug, context, params) {
   if (!nav) return false;
   const t = translate(context, params);
-  const makeHref = withLang(context, params);
   const items = [];
   const getHome = routerFunction(context, params, 'getHomeSlug') || (typeof getHomeSlug === 'function' ? getHomeSlug : null);
   const postsEnabledFn = routerFunction(context, params, 'postsEnabled') || (typeof postsEnabled === 'function' ? postsEnabled : () => true);
   const homeSlug = getHome ? getHome() : 'posts';
   updateHomeLinks(context, { ...(params || {}), getHomeSlug: () => homeSlug });
-  if (postsEnabledFn()) {
-    items.push({ slug: 'posts', label: t('ui.allPosts'), href: makeHref('?tab=posts') });
+  const postsHref = getRouteHref(context, params, 'getPostsHref');
+  if (postsEnabledFn() && postsHref) {
+    items.push({ slug: 'posts', label: t('ui.allPosts'), href: postsHref });
   }
   Object.entries(tabsBySlug || {}).forEach(([slug, info]) => {
     const label = info && info.title ? String(info.title) : slug;
-    items.push({ slug, label, href: makeHref(`?tab=${encodeURIComponent(slug)}`) });
+    const href = getRouteHref(context, params, 'getTabHref', slug);
+    if (href) items.push({ slug, label, href });
   });
   nav.innerHTML = items.map((item) => {
     const current = item.slug === activeSlug || (!activeSlug && item.slug === homeSlug);
@@ -355,20 +371,22 @@ function renderFooterLinks(root, tabsBySlug, postsEnabled, getHomeSlug, getHomeL
   }
   setChromeHidden(root, false);
   const t = translate(context, params);
-  const makeHref = withLang(context, params);
   const links = [];
   const getHome = routerFunction(context, params, 'getHomeSlug') || getHomeSlug;
   const getLabel = routerFunction(context, params, 'getHomeLabel') || getHomeLabel;
   const homeSlug = typeof getHome === 'function' ? getHome() : 'posts';
   const homeLabel = typeof getLabel === 'function' ? getLabel() : t('ui.allPosts');
-  if (homeSlug) links.push({ href: makeHref(`?tab=${encodeURIComponent(homeSlug)}`), label: homeLabel });
+  const homeHref = getRouteHref(context, params, 'getHomeHref');
+  if (homeHref) links.push({ href: homeHref, label: homeLabel || homeSlug });
   Object.entries(tabsBySlug || {}).forEach(([slug, info]) => {
     if (slug === homeSlug) return;
-    links.push({ href: makeHref(`?tab=${encodeURIComponent(slug)}`), label: (info && info.title) || slug });
+    const href = getRouteHref(context, params, 'getTabHref', slug);
+    if (href) links.push({ href, label: (info && info.title) || slug });
   });
   const searchEnabledFn = routerFunction(context, params, 'searchEnabled');
   const searchEnabled = searchEnabledFn ? searchEnabledFn() : featureEnabled(params, 'search', context);
-  if (searchEnabled) links.push({ href: makeHref('?tab=search'), label: t('ui.searchTab') });
+  const searchHref = getRouteHref(context, params, 'getSearchHref');
+  if (searchEnabled && searchHref) links.push({ href: searchHref, label: t('ui.searchTab') });
   root.innerHTML = links.map((link) => `<a href="${safe(link.href)}">${safe(link.label)}</a>`).join('');
   return true;
 }
@@ -576,7 +594,14 @@ function createEffects(context = {}) {
       }
       const render = utilities && typeof utilities.renderTagSidebar === 'function'
         ? utilities.renderTagSidebar
-        : renderDefaultTags;
+        : null;
+      if (!render) {
+        if (tagBox) {
+          tagBox.innerHTML = '';
+          setChromeHidden(tagBox, true);
+        }
+        return true;
+      }
       try { render(postsIndex || {}); } catch (_) {}
       setChromeHidden(tagBox, false);
       return true;
