@@ -1,0 +1,1102 @@
+{
+  "schemaVersion": 1,
+  "decision": "exact-owner-context-fingerprint-baseline-with-zero-growth",
+  "rules": ["no-empty", "no-unused-vars", "no-useless-assignment"],
+  "expectedCounts": {
+    "no-empty": 50,
+    "no-unused-vars": 59,
+    "no-useless-assignment": 0
+  },
+  "diagnostics": [
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:createEffects/property:handleWindowResize",
+      "ownerPath": "body[37]/body/body[3]/argument/properties[19]/value/body/body[3]/handler/body",
+      "fingerprint": "sha256:46daf48d90a683fa3bcd62694acffd3e1fb07a8778a31936813a9fae62f80f97",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:createEffects/property:renderTagSidebar",
+      "ownerPath": "body[37]/body/body[3]/argument/properties[11]/value/body/body[4]/handler/body",
+      "fingerprint": "sha256:3efdcb0b74277a8343f566c025c098fcf682d4cf90db9037203e6a60247558a4",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:currentLang",
+      "ownerPath": "body[16]/body/body[1]/handler/body",
+      "fingerprint": "sha256:9789674db1b2523b15afae507c236312ac700503eece0206ca23bdd600a1d47d",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:currentLang",
+      "ownerPath": "body[16]/body/body[2]/handler/body",
+      "fingerprint": "sha256:bf4c7b16c53b9e44a2e3d22b246e3b37934f34a59d9d8c2703596d75545e5bfc",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:currentLang",
+      "ownerPath": "body[16]/body/body[3]/handler/body",
+      "fingerprint": "sha256:601d0d2148725d032f39a2c1cd4297cf7093a8d77f40672701bf6a6e30c068ac",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:enhanceIndexLayoutFor",
+      "ownerPath": "body[36]/body/body[1]/handler/body",
+      "fingerprint": "sha256:84c12df3569e7dd849a2d7cf4030eaa08eca5f95fc7ef781c340b9c5df5c2079",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:enhanceIndexLayoutFor",
+      "ownerPath": "body[36]/body/body[2]/handler/body",
+      "fingerprint": "sha256:5f52a024fbad9b6169c6063bf0abee759b349b4ae8dd0aa7521c1f59aba2515a",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:enhanceIndexLayoutFor",
+      "ownerPath": "body[36]/body/body[3]/handler/body",
+      "fingerprint": "sha256:8f50c31e0ed3968da878827b414aec094cacbee815c6eced3bc42a27a28363f0",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:enhanceIndexLayoutFor",
+      "ownerPath": "body[36]/body/body[4]/handler/body",
+      "fingerprint": "sha256:40ff740de462e77e76b30186078be207c553a8851ff166e207dfaff05e08f982",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:getRegion",
+      "ownerPath": "body[19]/body/body[3]/consequent/body[0]/handler/body",
+      "fingerprint": "sha256:8d53aa92f17ebdf5f8d4dd69d89a972db804db752020a8b61d67b3d87e065a28",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:getScrollState",
+      "ownerPath": "body[23]/body/body[2]/handler/body",
+      "fingerprint": "sha256:8720769bfad7e0193555cde8bd07e9dec258de05193e1b0a01f1fde290d24283",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:hideElement/variable:finish",
+      "ownerPath": "body[26]/body/body[1]/declarations[0]/init/body/body[0]/handler/body",
+      "fingerprint": "sha256:63174fc744eca649bf5442ce64eb29d781522b72cf351399f24f7d304ea9d62a",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:restoreScrollState",
+      "ownerPath": "body[24]/body/body[4]/handler/body",
+      "fingerprint": "sha256:f5848c557c37cdf0868fd5eea1cab909e7d7d49b3424bc034a63d6b2744de0f1",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:restoreScrollState",
+      "ownerPath": "body[24]/body/body[5]/handler/body",
+      "fingerprint": "sha256:fe4dd73dd716359831d1c0c467c61c9d48bfe49934dfdc53ee6a52b0ddc25bee",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:scrollToTop",
+      "ownerPath": "body[22]/body/body[2]/handler/body",
+      "fingerprint": "sha256:c404e5c229abd39b0e83ddf463cfbae5da0b3e6d26d1ea3b439ad08021dd84e8",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:scrollToTop",
+      "ownerPath": "body[22]/body/body[3]/handler/body",
+      "fingerprint": "sha256:c6a234f956889fe0f9a906a2dd7becd767d45319ddbefaf3fa54eee198f629b1",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:setChromeHidden",
+      "ownerPath": "body[12]/body/body[1]/handler/body",
+      "fingerprint": "sha256:248ba950620ff8f94c0211e6863246ae6685de62a50c086fb4912f604078ae0e",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:setChromeHidden",
+      "ownerPath": "body[12]/body/body[2]/handler/body",
+      "fingerprint": "sha256:09d5dcbdcaaf2a49c239bf9f2df6ea264074f0d4b042a79e48333da4d36fe8d9",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:setHomeLinkHref",
+      "ownerPath": "body[13]/body/body[1]/consequent/body[0]/handler/body",
+      "fingerprint": "sha256:f0b08427984b8d84381f2a156c7c6d24d866a4de0ed7cb926bd3256836e1c8d6",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:setHomeLinkHref",
+      "ownerPath": "body[13]/body/body[1]/consequent/body[1]/handler/body",
+      "fingerprint": "sha256:f9001f7744ccfe37c5f13e2dd1e6dea3580a8a968c3c9a21ff2f26f0f2394fa5",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:setHomeLinkHref",
+      "ownerPath": "body[13]/body/body[1]/consequent/body[2]/handler/body",
+      "fingerprint": "sha256:c499401c7896948bd453888a3434110ae38a1665edf78e5431463d5a8a2750ce",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:setHomeLinkHref",
+      "ownerPath": "body[13]/body/body[2]/handler/body",
+      "fingerprint": "sha256:7f306e665653d50bc0feaecfcc6cec10e77d6d48481f549051f481f52205978d",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:setHomeLinkHref",
+      "ownerPath": "body[13]/body/body[3]/handler/body",
+      "fingerprint": "sha256:bfe1a7be806fb9c335378e5e62c3f287909d6c4f97e500d1e614fb1c8f5aea77",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:setHomeLinkHref",
+      "ownerPath": "body[13]/body/body[4]/handler/body",
+      "fingerprint": "sha256:3ecbd4d1107d2408178c7a7d8a6a6d5a5e19675693dc74b0c00874675c7b2c92",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:setupNavOverflow/assignment:nav.__cartographOverflowCleanup",
+      "ownerPath": "body[34]/body/body[8]/expression/right/body/body[0]/handler/body",
+      "fingerprint": "sha256:0019be94a599f35b6591cb05c95b1d1b5344e9009013e1137ee38e3e3503da67",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:setupNavOverflow/assignment:nav.__cartographOverflowCleanup",
+      "ownerPath": "body[34]/body/body[8]/expression/right/body/body[1]/handler/body",
+      "fingerprint": "sha256:dec50ce777a1160778421c03b660eead87ee8acc9c91e9b8bb49b3150aaf65ec",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:setupNavOverflow",
+      "ownerPath": "body[34]/body/body[3]/consequent/body[0]/handler/body",
+      "fingerprint": "sha256:e45f2988860ceac36bfed2e8398c58a25c42b1ab8f7aca8ee330b1ecf270f458",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:setupReadingProgress/assignment:root.__cartographProgressCleanup",
+      "ownerPath": "body[35]/body/body[11]/expression/right/body/body[0]/handler/body",
+      "fingerprint": "sha256:e8538aa3c4765ce3eb92753eabe58ae3c2b8cf59dc0d36dcdc0947809082b4f5",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:setupReadingProgress/assignment:root.__cartographProgressCleanup",
+      "ownerPath": "body[35]/body/body[11]/expression/right/body/body[1]/handler/body",
+      "fingerprint": "sha256:ee1e7d4852e9041b299450aa18cc2199fa844fde6ba45b8a48d0f51783665a85",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:setupReadingProgress/assignment:root.__cartographProgressCleanup",
+      "ownerPath": "body[35]/body/body[11]/expression/right/body/body[2]/consequent/body[0]/handler/body",
+      "fingerprint": "sha256:b5005fa6a15585907fa7e94cea1915368b80eaf38692a53170a1389e9998ed00",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:setupReadingProgress",
+      "ownerPath": "body[35]/body/body[4]/consequent/body[0]/handler/body",
+      "fingerprint": "sha256:70062158241aaaa9fad87a10ca2126a2d77aaf34be55460731875788c93383b3",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:setupToolsPanel",
+      "ownerPath": "body[28]/body/body[4]/handler/body",
+      "fingerprint": "sha256:bcac7325ff66e00a44be7e741740190ee366a43283fd6ec60569e34d0eb92fac",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:setupToolsPanel",
+      "ownerPath": "body[28]/body/body[5]/handler/body",
+      "fingerprint": "sha256:0ba8e41c992b0e85fafdb7018f90679ba417802fe2888236c46558f817dda71b",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:translate",
+      "ownerPath": "body[15]/body/body[2]/handler/body",
+      "fingerprint": "sha256:d252487c136def2550c2c4270d06fb0c59fdc35b92ad7775d638478a3f745d24",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:translate",
+      "ownerPath": "body[15]/body/body[3]/handler/body",
+      "fingerprint": "sha256:b0cba60c68e790a085504c90da010f90174e275fc45755ccf2f8ddea1225b241",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:withLang",
+      "ownerPath": "body[17]/body/body[3]/handler/body",
+      "fingerprint": "sha256:6af97d69144f20bef62b807d735789789fe366be8667200f66aa016c7b305483",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:createEffects/property:handleWindowResize",
+      "ownerPath": "body[37]/body/body[3]/argument/properties[19]/value/body/body[3]/handler/param",
+      "fingerprint": "sha256:37cb163bfdd604493eae063ea12a30c6bf6cba6f796b6440d6a4de48ae57f8d7",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:createEffects/property:renderTagSidebar",
+      "ownerPath": "body[37]/body/body[3]/argument/properties[11]/value/body/body[4]/handler/param",
+      "fingerprint": "sha256:28bef0978c0a01e62cd372710703b283ffc5e91761289368892605698b565626",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:createEffects/property:scrollToHash",
+      "ownerPath": "body[37]/body/body[3]/argument/properties[16]/value/body/body[3]/handler/param",
+      "fingerprint": "sha256:6b9e273be6e9752677efa95a42500537e603169f57a1a5fb07255d33fef99120",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:currentLang",
+      "ownerPath": "body[16]/body/body[1]/handler/param",
+      "fingerprint": "sha256:d297f0250f12166afc15836fc6987269347c7b8d57319447b9b36a16c217355c",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:currentLang",
+      "ownerPath": "body[16]/body/body[2]/handler/param",
+      "fingerprint": "sha256:3f62037d330bc133a05e46563cd323e8916780fd8d30154d57d10aa42c7ae179",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:currentLang",
+      "ownerPath": "body[16]/body/body[3]/handler/param",
+      "fingerprint": "sha256:c8961ab604dafc5af179d7f838b3d193e98cbe26f76254df3e6e6830bd37793a",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:enhanceIndexLayoutFor",
+      "ownerPath": "body[36]/body/body[1]/handler/param",
+      "fingerprint": "sha256:b63d2f5daea3faa5ee41d0afa0a9a7d88a87b24973e8f0d9f7195e478a38f737",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:enhanceIndexLayoutFor",
+      "ownerPath": "body[36]/body/body[2]/handler/param",
+      "fingerprint": "sha256:f0dcb63458faac088cae0f5c7a8beb25ab7ec1bcfb30b8f410f710acc0dc1e22",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:enhanceIndexLayoutFor",
+      "ownerPath": "body[36]/body/body[3]/handler/param",
+      "fingerprint": "sha256:768ca41ad5791f6597117353a6ff9b67af3d40cca14be0bf8ec9679044d0e853",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:enhanceIndexLayoutFor",
+      "ownerPath": "body[36]/body/body[4]/handler/param",
+      "fingerprint": "sha256:834a5c9f960630422f3c53a165378866f8a3c2387f84d6686ca4287fbd671c27",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:getRegion",
+      "ownerPath": "body[19]/body/body[3]/consequent/body[0]/handler/param",
+      "fingerprint": "sha256:09d64f7aca21e715ad26856e6a67bf9d3d26d82311f8478764af2db297ba11c5",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:getRouteHref",
+      "ownerPath": "body[11]/body/body[2]/handler/param",
+      "fingerprint": "sha256:ec50a32a20715755a757b0839bb5273e58722345523f2b186c2151e76401c15c",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:getScrollState",
+      "ownerPath": "body[23]/body/body[2]/handler/param",
+      "fingerprint": "sha256:d2fc0b68a4d43cb7a60110a776929d02f6fdb82d30154e167490cce35a316f06",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:getScrollState",
+      "ownerPath": "body[23]/body/body[3]/handler/param",
+      "fingerprint": "sha256:9c38fecd0d2e74e9ebc0a898192dad01d2012798a1b688736ade42ee635b3e1c",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:hideElement/variable:finish",
+      "ownerPath": "body[26]/body/body[1]/declarations[0]/init/body/body[0]/handler/param",
+      "fingerprint": "sha256:b6537e6780008e43250171ae24278b08283429925ce01a4f335ab82ec07564a7",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:hideElement",
+      "ownerPath": "body[26]/body/body[2]/handler/param",
+      "fingerprint": "sha256:b4f18bda46e5faf9bc522cea12c6772adf7a8040ef09eeed997463bcf0a4c6d1",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:restoreScrollState",
+      "ownerPath": "body[24]/body/body[4]/handler/param",
+      "fingerprint": "sha256:8413c7b2ec142ed6450b19c72685b766c287186edefcb4607bf945a45c93079c",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:restoreScrollState",
+      "ownerPath": "body[24]/body/body[5]/handler/param",
+      "fingerprint": "sha256:2d7e8076d0735c8ba93a9f801ec6b1905f2dab73cff003c059a004997914de12",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:scrollToTop",
+      "ownerPath": "body[22]/body/body[2]/handler/param",
+      "fingerprint": "sha256:281e5d4122ee684ab098631726423823383361a9e5d912bb31668fa51ae79940",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:scrollToTop",
+      "ownerPath": "body[22]/body/body[3]/handler/param",
+      "fingerprint": "sha256:cf255e2842e056044ba07706f4ad8c8e0cfe92a15aec0f109636a8c39c1654a8",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:setChromeHidden",
+      "ownerPath": "body[12]/body/body[1]/handler/param",
+      "fingerprint": "sha256:8f361920906bd81cb1a111bb42c727d2a2c81022fdadc2b414172f35a494fdfe",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:setChromeHidden",
+      "ownerPath": "body[12]/body/body[2]/handler/param",
+      "fingerprint": "sha256:ce1954ad83fd5ce79be2821ce182c1a7cf4f7020d9aa768fc21a788890fa5fc5",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:setHomeLinkHref",
+      "ownerPath": "body[13]/body/body[1]/consequent/body[0]/handler/param",
+      "fingerprint": "sha256:9fb419e818fe33bf446933d8bc23aee9174d851fd258a96ea62309bc5ab59615",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:setHomeLinkHref",
+      "ownerPath": "body[13]/body/body[1]/consequent/body[1]/handler/param",
+      "fingerprint": "sha256:3696835a921082753b599e91b0f8021edee9f063dec4381bde5f2243e87135d4",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:setHomeLinkHref",
+      "ownerPath": "body[13]/body/body[1]/consequent/body[2]/handler/param",
+      "fingerprint": "sha256:0cdc71ed6c901c886ccb690ced77ed48526bdaf62dcaadc72e6430a81cb40e71",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:setHomeLinkHref",
+      "ownerPath": "body[13]/body/body[2]/handler/param",
+      "fingerprint": "sha256:59541282d40bd4242ac9457e6350ed4720cd7657818fd8c37f8e4a39c7a24cd4",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:setHomeLinkHref",
+      "ownerPath": "body[13]/body/body[3]/handler/param",
+      "fingerprint": "sha256:42d4dfedfea9cb30429478358176f33e9d6390e8ee62766424a284a4bc24209b",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:setHomeLinkHref",
+      "ownerPath": "body[13]/body/body[4]/handler/param",
+      "fingerprint": "sha256:30a01ff03a5a56aa1f387dbb8cb2fbd98648736175d83b36f3d5ec58f8dfb95a",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:setupNavOverflow/assignment:nav.__cartographOverflowCleanup",
+      "ownerPath": "body[34]/body/body[8]/expression/right/body/body[0]/handler/param",
+      "fingerprint": "sha256:2901a0e9c71354827212ba8504aafe88428a8900bfd5d1b02862d454b486746e",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:setupNavOverflow/assignment:nav.__cartographOverflowCleanup",
+      "ownerPath": "body[34]/body/body[8]/expression/right/body/body[1]/handler/param",
+      "fingerprint": "sha256:5c33b93058737b33f1299cb03c33bd5876f217b371a99e2a9262b9055b2956aa",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:setupNavOverflow",
+      "ownerPath": "body[34]/body/body[3]/consequent/body[0]/handler/param",
+      "fingerprint": "sha256:6f2f5bb00d801c9349c44d2022668c450d2a92e11f3552f5729bb30d97ec5a2d",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:setupReadingProgress/assignment:root.__cartographProgressCleanup",
+      "ownerPath": "body[35]/body/body[11]/expression/right/body/body[0]/handler/param",
+      "fingerprint": "sha256:6780b4d65a99a2bd9004852ec88f8d98477a7237ea353fc796e107d3eebc6c0b",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:setupReadingProgress/assignment:root.__cartographProgressCleanup",
+      "ownerPath": "body[35]/body/body[11]/expression/right/body/body[1]/handler/param",
+      "fingerprint": "sha256:a6acec5f31b8b6176773ad84ae015ae1c33522c684171d13fda80cbe9506d362",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:setupReadingProgress/assignment:root.__cartographProgressCleanup",
+      "ownerPath": "body[35]/body/body[11]/expression/right/body/body[2]/consequent/body[0]/handler/param",
+      "fingerprint": "sha256:23fa8d8c113f53b208b53e13f35785379a03e13e87045dc6927827f637aa9676",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:setupReadingProgress",
+      "ownerPath": "body[35]/body/body[4]/consequent/body[0]/handler/param",
+      "fingerprint": "sha256:8bf7bc0b91768380f44c21abaac45139bf51e5adc53376f0d5a40cb2de53753d",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:setupToolsPanel",
+      "ownerPath": "body[28]/body/body[4]/handler/param",
+      "fingerprint": "sha256:173d8097350379a87773f64d3a50f8fe9fbc968f36c890e77c10a89e43e28c25",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:setupToolsPanel",
+      "ownerPath": "body[28]/body/body[5]/handler/param",
+      "fingerprint": "sha256:fba7acd4a656985e6931568955aa1f57c8d040eb8139aa42f90775d7e018e8f2",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:showElement",
+      "ownerPath": "body[25]/body/body[1]/handler/param",
+      "fingerprint": "sha256:ec06de26aaf2de3c197eb1cf83170b9be08921c3ef10a5515d7703279411905c",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:translate",
+      "ownerPath": "body[15]/body/body[2]/handler/param",
+      "fingerprint": "sha256:0fbd12dc1ca9595a543f4a443d2ab37d7e9b743a58364cb04bcddff51fa219db",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:translate",
+      "ownerPath": "body[15]/body/body[3]/handler/param",
+      "fingerprint": "sha256:301e12a3ad7944c3a04080c1bc98254fe5c7ba1840b2b5547d36e36fa576a0cb",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:withLang",
+      "ownerPath": "body[17]/body/body[3]/handler/param",
+      "fingerprint": "sha256:7731ecc89faf2d6b2353edc5c04983ef258fc58c6aceb5abbf82c1a9a66fb938",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:withLang",
+      "ownerPath": "body[17]/body/body[4]/argument/body/body[0]/handler/param",
+      "fingerprint": "sha256:24ff814ed70011719895ad8d86d621ac61b4deb0cad162ca987d281574d7a4a6",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:clearToc",
+      "ownerPath": "body[19]/body/body[1]/handler/body",
+      "fingerprint": "sha256:5083eb378e9f314ccc35e1db7a5bf53e08df10ee9f222e546e4c581fd7757719",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:clearToc",
+      "ownerPath": "body[19]/body/body[2]/handler/body",
+      "fingerprint": "sha256:03edce41ef858fa5fd0356c154536d9def1706caa6cfc560792d17df6dbe6f05",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:decorateArticle/callback:copyBtn.addEventListener(literal:\"click\")#2",
+      "ownerPath": "body[29]/body/body[10]/consequent/body[0]/expression/arguments[1]/body/body[3]/handler/body",
+      "fingerprint": "sha256:f94f08a158d47a61a6f3c72242446e8e385a9825cd420f240e51bf550a1c4c29",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:decorateArticle/callback:versionSelect.addEventListener(literal:\"change\")#2",
+      "ownerPath": "body[29]/body/body[12]/consequent/body[0]/expression/arguments[1]/body/body[5]/handler/body",
+      "fingerprint": "sha256:559cdf52560171e5854c86a279f00f9c12db8aa06a808ffbfa0311c49f1edae1",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:decorateArticle",
+      "ownerPath": "body[29]/body/body[4]/handler/body",
+      "fingerprint": "sha256:ea84e366a93e8439bb6ce733d9a4555d320c823f01bcdd8d1fdbc05fffbdf76c",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:decorateArticle",
+      "ownerPath": "body[29]/body/body[5]/handler/body",
+      "fingerprint": "sha256:7b1705d4acc536932721a8c3626c22574967978f5d3959ac99a3d62ffdb60c10",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:decorateArticle",
+      "ownerPath": "body[29]/body/body[6]/handler/body",
+      "fingerprint": "sha256:99f12e78dc2bb81a358569cf670ec51ed553c35f9a65dfd3419c31dc87e201c3",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:decorateArticle",
+      "ownerPath": "body[29]/body/body[7]/handler/body",
+      "fingerprint": "sha256:b5b1c5fbaf29aae5d89b0b201ae495be5a86aa1c113d4c4202c433f3067e2f4b",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:decorateArticle",
+      "ownerPath": "body[29]/body/body[8]/handler/body",
+      "fingerprint": "sha256:1862dc00029bc3f431b1e27dd5f41250c5194674a99e43e4abad5e2f0a745580",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:fallbackT",
+      "ownerPath": "body[5]/body/body[0]/handler/body",
+      "fingerprint": "sha256:67c14f6e8cb3ed8534a5247c391e9f1f2e29b243c18a9c80ebe1d82e7a023d21",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:getRegion",
+      "ownerPath": "body[16]/body/body[4]/consequent/body[0]/handler/body",
+      "fingerprint": "sha256:89aa82710ad2f5d8d5be0a23c74da196bcd8821b3d3b7f08dcc60b4bc11e19c2",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:renderArticleShell",
+      "ownerPath": "body[30]/body/body[14]/handler/body",
+      "fingerprint": "sha256:feb869b787d0149121b9b95e7364cb7ef5e766ac9deb785023888eae686a873c",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:scrollToBoardTop",
+      "ownerPath": "body[18]/body/body[2]/handler/body",
+      "fingerprint": "sha256:ed09b8e2adad1e314b40004b93b0e2c394b42cc8a4870f538eaad6256d20c84d",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-empty",
+      "messageId": "unexpected",
+      "message": "Empty block statement.",
+      "owner": "function:scrollToBoardTop",
+      "ownerPath": "body[18]/body/body[3]/handler/body",
+      "fingerprint": "sha256:1ae157b6ae0c211b991bd89742fe7d63b4fa79bc214a388dee8ecff5d096eb84",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:buildPagination/variable:makePageHref",
+      "ownerPath": "body[32]/body/body[2]/declarations[0]/init/body/body[1]/handler/param",
+      "fingerprint": "sha256:b1d2d0106a3c92cd148ff9fb744c742b0ed750c5255c32c47ae36a7a5c79bc6d",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:clearToc",
+      "ownerPath": "body[19]/body/body[1]/handler/param",
+      "fingerprint": "sha256:02306c47e0befa5cae7d9d9faaf32119806ed2b76ffc631551b5d44f2931e33a",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:clearToc",
+      "ownerPath": "body[19]/body/body[2]/handler/param",
+      "fingerprint": "sha256:3fa5e13615af690c9d88b43b434e8c2c5179d8a733a21f31fba8697f85487ae4",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:decorateArticle/callback:copyBtn.addEventListener(literal:\"click\")#2",
+      "ownerPath": "body[29]/body/body[10]/consequent/body[0]/expression/arguments[1]/body/body[3]/handler/param",
+      "fingerprint": "sha256:d47e31577b56f73bd26ed511fe2d508199d5bff6124c0be409ebbce68d37e282",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:decorateArticle/callback:versionSelect.addEventListener(literal:\"change\")#2",
+      "ownerPath": "body[29]/body/body[12]/consequent/body[0]/expression/arguments[1]/body/body[5]/handler/param",
+      "fingerprint": "sha256:3f0d1e2a1b84a779b4bac0ece49e3b0317170320a51a1a4a1bc16f17844025db",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:decorateArticle",
+      "ownerPath": "body[29]/body/body[4]/handler/param",
+      "fingerprint": "sha256:98f3b85ba8e6d57ab6698c46baf5ad17708ebe6a813d1403e446f9da89b49801",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:decorateArticle",
+      "ownerPath": "body[29]/body/body[5]/handler/param",
+      "fingerprint": "sha256:ad434c2aa37416058ffdb24b2f00bcb4b64ef70c9c11f93c0bc29dee85bffa23",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:decorateArticle",
+      "ownerPath": "body[29]/body/body[6]/handler/param",
+      "fingerprint": "sha256:bb415b31f21057a790dd91f9367d60a9cde9756f391eef107551bb56f3738b1d",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:decorateArticle",
+      "ownerPath": "body[29]/body/body[7]/handler/param",
+      "fingerprint": "sha256:7e2f660e652bbaf814ad57b394a6413ebdd08aa0eb466f4c6d181b86dde046e8",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:decorateArticle",
+      "ownerPath": "body[29]/body/body[8]/handler/param",
+      "fingerprint": "sha256:9a9f47cdd3e21a52d81d4e123ff99ed7fef3ebf28fe2c32fb0f69ead1af370e6",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:fallbackT",
+      "ownerPath": "body[5]/body/body[0]/handler/param",
+      "fingerprint": "sha256:3886e4a1c4cf1c967e074b6b5ed25ce57aac63c736233d48ca122e990829a7b0",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:getRegion",
+      "ownerPath": "body[16]/body/body[4]/consequent/body[0]/handler/param",
+      "fingerprint": "sha256:078271c055c61d7ea90f014a164e19968dca749baf528889b9925fbe2a6bfe5d",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:getRouteHref",
+      "ownerPath": "body[15]/body/body[3]/handler/param",
+      "fingerprint": "sha256:9846463bc4cf7fbcffd07950cb9b5f36b0a604de8a07d0bf0d5f01bca3a83d1e",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:renderArticleShell",
+      "ownerPath": "body[30]/body/body[14]/handler/param",
+      "fingerprint": "sha256:b0679b94cf4a96a88d51b1b95d523a7423fc5e4c12c618d7a861cdc4c5666484",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:renderContentLegend",
+      "ownerPath": "body[26]/declaration/body/body[7]/consequent/body[0]/handler/param",
+      "fingerprint": "sha256:1345b2a78ef2b1f11a124b6f6b0154b7bf695b37bb5008cba53791eb46922dbb",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:scrollToBoardTop",
+      "ownerPath": "body[18]/body/body[2]/handler/param",
+      "fingerprint": "sha256:89fa48fb58f880aaa4daf6b0265c32e3e638233b7e145e115edc546b6eeef85c",
+      "occurrence": 1
+    },
+    {
+      "path": "theme/modules/views.js",
+      "rule": "no-unused-vars",
+      "messageId": "unusedVar",
+      "message": "'_' is defined but never used.",
+      "owner": "function:scrollToBoardTop",
+      "ownerPath": "body[18]/body/body[3]/handler/param",
+      "fingerprint": "sha256:bf37e170d12fb8a6f029c68c02f637e54b8af3312bfd61b9502e4722a7780863",
+      "occurrence": 1
+    }
+  ]
+}

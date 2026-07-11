@@ -1,0 +1,283 @@
+{
+  "schemaVersion": 1,
+  "decision": "reviewed-exact-fingerprint-baseline-with-zero-growth",
+  "scope": ["theme/**/*.js", "theme/**/*.mjs"],
+  "rationale": "Cartograph intentionally renders Press-sanitized content, reviewed Press renderer output, and owned escaped or static templates. Exact normalized semantic AST fingerprints pin each sink to its full lexical owner and full-file AST path so equivalent source cannot move between contexts without review.",
+  "wrappers": [],
+  "expectedKinds": {
+    "html-native-sink-indirect-reference:html": 2,
+    "innerHTML-write": 25
+  },
+  "approved": [
+    {
+      "path": "theme/modules/interactions.js",
+      "owner": "function:createEffects/property:renderTagSidebar",
+      "context": "function:createEffects/property:renderTagSidebar@path:body[37]/body/body[3]/argument/properties[11]/value/body/body[1]/consequent/body[0]/consequent/body[0]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:2baac8fdeb3e58b668898d951fa75c4feb8e9882018235a0f05b6da851099e41",
+      "occurrence": 1,
+      "disposition": "empty-clear",
+      "rationale": "The tag-band fallback writes only a constant empty string when search or tag rendering is unavailable."
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "owner": "function:createEffects/property:renderTagSidebar",
+      "context": "function:createEffects/property:renderTagSidebar@path:body[37]/body/body[3]/argument/properties[11]/value/body/body[3]/consequent/body[0]/consequent/body[0]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:ee39c29cc7addf3b578b6054fa260a9c9bf46a3db7816ef8553e59c3291782bd",
+      "occurrence": 1,
+      "disposition": "empty-clear",
+      "rationale": "The tag-band fallback writes only a constant empty string when search or tag rendering is unavailable."
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "owner": "function:enhanceIndexLayoutFor",
+      "context": "function:enhanceIndexLayoutFor@path:body[36]/body/body[4]/block/body[0]/alternate/body[1]/consequent/body[0]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:1b3c720f2c0b1b7b1246be9cb06f7e3d666a267fe544bf022ef34f5cf8bcd34e",
+      "occurrence": 1,
+      "disposition": "empty-clear",
+      "rationale": "The tag-band fallback writes only a constant empty string when search or tag rendering is unavailable."
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "owner": "function:renderFooterLinks",
+      "context": "function:renderFooterLinks@path:body[32]/body/body[1]/consequent/body[0]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:c395fe158730853c9cdd58cb19d8795deb60504bc10518a510a61858f91c3faa",
+      "occurrence": 1,
+      "disposition": "empty-clear",
+      "rationale": "The profile/footer disabled branches assign only a constant empty string and parse no markup."
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "owner": "function:renderFooterLinks",
+      "context": "function:renderFooterLinks@path:body[32]/body/body[16]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:1745c3a330bb4b7afb821c7117960dfd18a94cfb026ff187d311c9a9ec1ce141",
+      "occurrence": 1,
+      "disposition": "escaped-theme-template",
+      "rationale": "Footer route hrefs come from Press router helpers and both hrefs and labels are escaped before insertion."
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "owner": "function:renderLinksList",
+      "context": "function:renderLinksList@path:body[30]/body/body[3]/consequent/body[0]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:cb1f36e6b5e873db819691a1218baea094019ce8fc88f01d31579058993410e7",
+      "occurrence": 1,
+      "disposition": "empty-clear",
+      "rationale": "The profile/footer disabled branches assign only a constant empty string and parse no markup."
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "owner": "function:renderLinksList",
+      "context": "function:renderLinksList@path:body[30]/body/body[6]/consequent/body[0]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:e7214f63590712a04fba7038a68b24542769efdb711504dca681b7a63f4494d4",
+      "occurrence": 1,
+      "disposition": "escaped-theme-template",
+      "rationale": "The empty-links notice inserts only a translated label after escaping it as theme-owned text."
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "owner": "function:renderLinksList",
+      "context": "function:renderLinksList@path:body[30]/body/body[7]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:199e899695211cfaf38738b939db577f62258f686a699a50f5e95bf2aba69628",
+      "occurrence": 1,
+      "disposition": "escaped-theme-template",
+      "rationale": "Profile URLs pass sanitizeUrl and every retained href and label is escaped before insertion."
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "owner": "function:renderNavLinks",
+      "context": "function:renderNavLinks@path:body[31]/body/body[10]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:29c5cb05fe4dbc412e87c3c69a8f79858fb51858f291bb82b99fd3a7800c3895",
+      "occurrence": 1,
+      "disposition": "escaped-theme-template",
+      "rationale": "Navigation hrefs come from Press router helpers and slugs, labels, and hrefs are escaped before insertion."
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "owner": "function:resetToolsPanel",
+      "context": "function:resetToolsPanel@path:body[29]/body/body[2]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:abd0a454d166ed8da0616af9eb3a72d332214a8193ead967eb42c0bf6b074219",
+      "occurrence": 1,
+      "disposition": "empty-clear",
+      "rationale": "The tools-panel assignment writes only a constant empty string while disabling or resetting visitor theme controls."
+    },
+    {
+      "path": "theme/modules/interactions.js",
+      "owner": "function:setupToolsPanel",
+      "context": "function:setupToolsPanel@path:body[28]/body/body[2]/consequent/body[0]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:2af5fc0a53a9be2bebc917a0b4e641b6f9ce594b912e1060cef2c1a7ee34a4d6",
+      "occurrence": 1,
+      "disposition": "empty-clear",
+      "rationale": "The tools-panel assignment writes only a constant empty string while disabling or resetting visitor theme controls."
+    },
+    {
+      "path": "theme/modules/layout.js",
+      "owner": "function:mount",
+      "context": "function:mount@path:body[2]/declaration/body/body[4]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:416c7447b847cade6178d6f82b6d5095f88e01ba173646a1ecfffaf2adaaa17a",
+      "occurrence": 1,
+      "disposition": "static-theme-template",
+      "rationale": "The mounted Cartograph shell is a source-static theme skeleton whose dynamic identity is populated through DOM properties later."
+    },
+    {
+      "path": "theme/modules/views.js",
+      "owner": "function:clearToc",
+      "context": "function:clearToc@path:body[19]/body/body[1]/block/body[0]/alternate/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:8921bed858ef65e7d5d013f29311f3cb81b3363ad4ed9d466b96106468384f33",
+      "occurrence": 1,
+      "disposition": "empty-clear",
+      "rationale": "The TOC fallback clear assigns only a constant empty string when no owned clear method is available."
+    },
+    {
+      "path": "theme/modules/views.js",
+      "owner": "function:renderArticleShell",
+      "context": "function:renderArticleShell@path:body[30]/body/body[12]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:ab7a114acf3da4327d238ff24a99d2e0f6058f7821a8567ab1d35cc18bc58668",
+      "occurrence": 1,
+      "disposition": "press-renderer-output",
+      "rationale": "The article shell inserts Press-rendered body HTML and metadata-card HTML while escaping all Cartograph-owned chrome values."
+    },
+    {
+      "path": "theme/modules/views.js",
+      "owner": "function:renderArticleShell",
+      "context": "function:renderArticleShell@path:body[30]/body/body[5]/declarations[0]/init/arguments[1]",
+      "kind": "html-native-sink-indirect-reference:html",
+      "fingerprint": "sha256:1e2ce52db906b034f7f50078cd3d02117053fd4c0557de37beb91984a4b9499e",
+      "occurrence": 1,
+      "disposition": "press-renderer-output",
+      "rationale": "The conservative native-sink reference is a read of content.html, Press-rendered article HTML passed through the theme contract."
+    },
+    {
+      "path": "theme/modules/views.js",
+      "owner": "function:renderArticleShell",
+      "context": "function:renderArticleShell@path:body[30]/body/body[5]/declarations[0]/init/arguments[2]",
+      "kind": "html-native-sink-indirect-reference:html",
+      "fingerprint": "sha256:c2f76d174dde7734382ef559e9685baa082da460f629af211d21eb1ae1c98f3a",
+      "occurrence": 1,
+      "disposition": "press-renderer-output",
+      "rationale": "The conservative native-sink reference is a read of params.html, Press-rendered article HTML passed through the theme contract."
+    },
+    {
+      "path": "theme/modules/views.js",
+      "owner": "function:renderContentLegend",
+      "context": "function:renderContentLegend@path:body[26]/declaration/body/body[7]/consequent/body[0]/block/body[0]/alternate/body[0]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:c7394bf26668448706205604b8e395d56c486424b4e7e88debc649446afe89b4",
+      "occurrence": 1,
+      "disposition": "press-renderer-output",
+      "rationale": "The fallback combines an escaped title with tocHtml produced by Press when the owned TOC component is unavailable."
+    },
+    {
+      "path": "theme/modules/views.js",
+      "owner": "function:renderErrorState",
+      "context": "function:renderErrorState@path:body[38]/declaration/body/body[4]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:fecc667e7823d32a9b5dac576242b8c71c7f16cdb37063f9234d16a9ac12b4c4",
+      "occurrence": 1,
+      "disposition": "escaped-theme-template",
+      "rationale": "Error text and action fields supplied through the Press view contract are escaped before insertion into the owned alert template."
+    },
+    {
+      "path": "theme/modules/views.js",
+      "owner": "function:renderIndexView",
+      "context": "function:renderIndexView@path:body[35]/declaration/body/body[5]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:f4b14edb984611b69521bff1460fd1b7d16aaa5e269bac8f218ac51c073b2a13",
+      "occurrence": 1,
+      "disposition": "press-renderer-output",
+      "rationale": "Index cards come from the Press-owned post-card renderer while Cartograph-owned headings, counts, and pagination values are escaped."
+    },
+    {
+      "path": "theme/modules/views.js",
+      "owner": "function:renderLoadingState",
+      "context": "function:renderLoadingState@path:body[37]/declaration/body/body[3]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:d555bc71fbbe2f6aaa75101ee6c691412df0cf5890d32d66bcc2983733230669",
+      "occurrence": 1,
+      "disposition": "static-theme-template",
+      "rationale": "The loading-state structure is source-static and its translated status label is escaped before insertion."
+    },
+    {
+      "path": "theme/modules/views.js",
+      "owner": "function:renderManifestPanel",
+      "context": "function:renderManifestPanel@path:body[21]/body/body[2]/consequent/body[0]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:ed766c7b9199438e382cb29d561de2483104244a4c3c5040fb772d78eff5c5cc",
+      "occurrence": 1,
+      "disposition": "empty-clear",
+      "rationale": "The manifest and route-map empty states assign only a constant empty string before hiding their panels."
+    },
+    {
+      "path": "theme/modules/views.js",
+      "owner": "function:renderManifestPanel",
+      "context": "function:renderManifestPanel@path:body[21]/body/body[4]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:ad3693f695df3373bf4bf3ba512736c4ebbbf916066b3789262e40e2fce675a8",
+      "occurrence": 1,
+      "disposition": "escaped-theme-template",
+      "rationale": "Manifest labels, titles, empty text, and row values are escaped or produced by Cartograph's reviewed escaped row renderers."
+    },
+    {
+      "path": "theme/modules/views.js",
+      "owner": "function:renderRouteMapPanel",
+      "context": "function:renderRouteMapPanel@path:body[25]/body/body[4]/consequent/body[0]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:18cc090a5c1a48c9f411984bee4c5a8d46791b63cbfced49091081a1e6774532",
+      "occurrence": 1,
+      "disposition": "empty-clear",
+      "rationale": "The manifest and route-map empty states assign only a constant empty string before hiding their panels."
+    },
+    {
+      "path": "theme/modules/views.js",
+      "owner": "function:renderRouteMapPanel",
+      "context": "function:renderRouteMapPanel@path:body[25]/body/body[7]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:9fe8d066c93053ec131c79b7986bc28038047b458b84c11b252cf642c861dd3b",
+      "occurrence": 1,
+      "disposition": "escaped-theme-template",
+      "rationale": "Route-map headings, block labels, anchors, excerpts, and counts are escaped before insertion into the owned panel template."
+    },
+    {
+      "path": "theme/modules/views.js",
+      "owner": "function:renderSearchResults",
+      "context": "function:renderSearchResults@path:body[36]/declaration/body/body[6]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:7d1d3319aa4ffb9970cc8ce6408ddeaef5424237cdf129a5a692d76788d3a02c",
+      "occurrence": 1,
+      "disposition": "press-renderer-output",
+      "rationale": "Search cards come from the Press-owned post-card renderer while query labels, counts, and pagination values are escaped."
+    },
+    {
+      "path": "theme/modules/views.js",
+      "owner": "function:resetContentLegend/callback:expression:ArrayExpression:154e4f037e81c455b1a2043fd3111d69254a319af2e6aaa8a281c816d2036475.forEach()#1",
+      "context": "function:resetContentLegend/callback:expression:ArrayExpression:154e4f037e81c455b1a2043fd3111d69254a319af2e6aaa8a281c816d2036475.forEach()#1@path:body[27]/declaration/body/body[3]/expression/arguments[0]/body/body[2]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:a4c7b16f623a5e83f05790dc2d4432055f66632d0bffe8fb5151f76f7af7287d",
+      "occurrence": 1,
+      "disposition": "empty-clear",
+      "rationale": "The manifest and route-map empty states assign only a constant empty string before hiding their panels."
+    },
+    {
+      "path": "theme/modules/views.js",
+      "owner": "function:resetContentLegend",
+      "context": "function:resetContentLegend@path:body[27]/declaration/body/body[5]/consequent/body[0]/expression",
+      "kind": "innerHTML-write",
+      "fingerprint": "sha256:174734c4dcdd7056120ef4e1026925c20b220c84e8506d97a5eb822dd62aec3e",
+      "occurrence": 1,
+      "disposition": "empty-clear",
+      "rationale": "The route-panel reset assigns only a constant empty string before hiding the unused panel."
+    }
+  ]
+}
