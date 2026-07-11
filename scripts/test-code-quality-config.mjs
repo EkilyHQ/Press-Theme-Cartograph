@@ -80,6 +80,8 @@ assert.match(eslintConfig, /noInlineConfig:\s*true/u, 'source comments must not 
 assert.match(eslintConfig, /reportUnusedDisableDirectives:\s*'error'/u);
 assert.match(eslintConfig, /sourceType:\s*'commonjs'/u, 'existing .js tooling must remain CommonJS');
 assert.match(eslintConfig, /sourceType:\s*'module'/u, 'theme and .mjs tooling must parse as modules');
+assert.match(eslintConfig, /files:\s*\['\*\.js', 'scripts\/\*\*\/\*\.js'\]/u);
+assert.match(eslintConfig, /files:\s*\['\*\.mjs', 'scripts\/\*\*\/\*\.mjs'\]/u);
 for (const ignoredPath of ['.press/**', 'artifacts-worktree/**', 'dist/**', 'node_modules/**', 'press-theme-*/**']) {
   assert.ok(eslintConfig.includes(`'${ignoredPath}'`), `ESLint must ignore ${ignoredPath}`);
 }
@@ -151,7 +153,9 @@ for (const token of [
   'noInlineConfig',
   'suppressedMessages',
   "ruleId === 'no-undef'",
-  'severity'
+  'severity',
+  'rootModuleProbePath',
+  'rootCommonProbePath'
 ]) {
   assert.ok(eslintPolicyTest.includes(token), `ESLint policy proof must retain ${token}`);
 }
@@ -271,10 +275,11 @@ const htmlPolicy = readJson('scripts/html-sink-policy.json');
 assert.equal(htmlPolicy.schemaVersion, 1);
 assert.equal(htmlPolicy.decision, 'reviewed-exact-fingerprint-baseline-with-zero-growth');
 assert.deepEqual(htmlPolicy.expectedKinds, {
+  'html-assignment-unproven-property': 1,
   'html-native-sink-indirect-reference:html': 2,
   'innerHTML-write': 25
 });
-assert.equal(htmlPolicy.approved.length, 27, 'all direct and conservative member references must remain classified');
+assert.equal(htmlPolicy.approved.length, 28, 'all direct and conservative member references must remain classified');
 for (const approved of htmlPolicy.approved) {
   assert.ok(
     typeof approved.owner === 'string' && approved.owner.length > 0,
@@ -301,6 +306,9 @@ assert.match(htmlSinkCheck, /Reflect\.set-/u);
 assert.match(htmlSinkCheck, /Object\.assign-/u);
 assert.match(htmlSinkCheck, /Object\.defineProperty-/u);
 assert.match(htmlSinkCheck, /Object\.defineProperties-/u);
+assert.match(htmlSinkCheck, /getOwnPropertyDescriptor/u);
+assert.match(htmlSinkCheck, /html-assignment-unproven-property/u);
+assert.match(htmlSinkCheck, /html-call-unproven-property/u);
 assert.match(htmlSinkCheck, /DOMParser-unproven-mime-call/u);
 assert.match(htmlSinkCheck, /contentDocument/u);
 assert.match(htmlSinkCheck, /ownerDocument/u);

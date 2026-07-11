@@ -5,6 +5,7 @@
   "rationale": "Cartograph intentionally renders Press-sanitized content, reviewed Press renderer output, and owned escaped or static templates. Exact normalized semantic AST fingerprints pin each sink to its full lexical owner and full-file AST path so equivalent source cannot move between contexts without review.",
   "wrappers": [],
   "expectedKinds": {
+    "html-assignment-unproven-property": 1,
     "html-native-sink-indirect-reference:html": 2,
     "innerHTML-write": 25
   },
@@ -138,6 +139,16 @@
       "occurrence": 1,
       "disposition": "empty-clear",
       "rationale": "The TOC fallback clear assigns only a constant empty string when no owned clear method is available."
+    },
+    {
+      "path": "theme/modules/views.js",
+      "owner": "function:createRouteMap/variable:counts/callback:blocks.reduce()#1",
+      "context": "function:createRouteMap/variable:counts/callback:blocks.reduce()#1@path:body[24]/body/body[2]/declarations[0]/init/arguments[0]/body/body[1]/expression",
+      "kind": "html-assignment-unproven-property",
+      "fingerprint": "sha256:e677b45d1d5dd4ea53741447fd19bfcc7486efafdf779b10ea4362e819494ab7",
+      "occurrence": 1,
+      "disposition": "non-dom-data-write",
+      "rationale": "createRouteMap writes block-type counters into a plain accumulator object created by reduce; the computed key never targets a DOM node or HTML-reflected property."
     },
     {
       "path": "theme/modules/views.js",
